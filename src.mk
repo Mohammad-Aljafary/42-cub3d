@@ -1,1 +1,3 @@
-SRC= main.c
+SRC= main.c \
+	checks.c 
+     
