@@ -1,6 +1,6 @@
 # include <cub3D.h>
 
-t_map *create_node_map (char *line, int row_num)
+t_map *new_map_node (char *line, int row_num)
 {
     t_map *new_node;
 

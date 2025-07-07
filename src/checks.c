@@ -84,11 +84,6 @@ int process_input(char *line, t_cub3d *cub3d)
             }
             add_node_texture(&cub3d->textures, new_texture);
         }
-        else
-        {
-            ft_free_split(tokens);
-            return (-1);
-        }
     }
     else if (!border_map (line))
     {
@@ -103,7 +98,7 @@ int process_input(char *line, t_cub3d *cub3d)
             ft_free_split(tokens);
             return (-1);
         }
-        add_map_node(&cub3d->map, new_map);
+        add_node_map(&cub3d->map, new_map);
         return (2);
     }
     return (0);

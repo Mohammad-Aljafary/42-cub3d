@@ -37,7 +37,7 @@ void print_cub3d(t_cub3d *cub3d)
     }
     printf("Cub3D Configuration:\n");
     printf("Resolution: %dx%d\n", cub3d->map_width, cub3d->map_height);
-    printf("Player Position: (%f, %f)\n", cub3d->player_x, cub3d->player_y);
+    printf("Player Position: (%d, %d)\n", cub3d->player_x, cub3d->player_y);
     printf("Player Direction: %f\n", cub3d->player_angle);
 
     print_map(cub3d->map);

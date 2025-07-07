@@ -42,4 +42,6 @@ int main(int argc, char** argv)
         fprintf(stderr, "Error: Invalid file or arguments.\n");
         return (EXIT_FAILURE);
     }
+    free_textures(cub3d->textures);
+    free (cub3d);
 }

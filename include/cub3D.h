@@ -11,6 +11,7 @@
 # include <MLX42/MLX42.h>
 # include <MLX42/MLX42_Int.h>
 # include <libft.h>
+# include "../libft/includes/get_next_line.h"
 
 typedef struct s_map 
 {
@@ -47,7 +48,8 @@ typedef struct s_cub3d
 int check_extension(const char *filename, const char *extension);
 int read_file(int fd, t_cub3d *cub3d);
 t_texture *create_node_texture(char *name, char *path, int red, int green, int blue);
-t_map *create_node_map(char *line, int row_num);
+void add_node_texture(t_texture **head, t_texture *new_node);
+t_map *new_map_node (char *line, int row_num);
 void add_node_map(t_map **head, t_map *new_node);
 void free_map(t_map *head);
 void free_textures(t_texture *head);
