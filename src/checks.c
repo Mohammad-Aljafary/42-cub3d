@@ -97,13 +97,13 @@ int process_input(char *line, t_cub3d *cub3d)
     }
     else
     {
-        t_map *new_map = new_map_node(line);
+        t_map *new_map = new_map_node(line, 1);
         if (!new_map)
         {
             ft_free_split(tokens);
             return (-1);
         }
-        add_map_node(&cub3d->map, new_map);condition
+        add_map_node(&cub3d->map, new_map);
         return (2);
     }
     return (0);
@@ -134,12 +134,45 @@ int read_texture(int fd, t_cub3d *cub3d)
     return (0);
 }
 
-int read_file(int fd, t_cub3d *cub3d)
+int read_map (int fd, t_cub3d *cub3d)
 {
     char *line;
+    t_map *new_map;
+    int i;
 
+    line = get_next_line(fd);
+    i = 2;
+    while (line)
+    {
+        if (ft_strcmp(line, "\n") == 0 || ft_strcmp(line, "\r\n") == 0)
+        {
+            free(line);
+            return (-1);
+        }
+        new_map = new_map_node(line, i);
+        if (!new_map)
+        {
+            free(line);
+            return (-1);
+        }
+        add_node_map(&cub3d->map, new_map);
+        line = get_next_line(fd);
+        i++;
+    }
+    if (cub3d->map == NULL)
+    {
+        free(line);
+        return (-1);
+    }
+    return (0);   
+}
+
+int read_file(int fd, t_cub3d *cub3d)
+{
     if (read_texture(fd, cub3d) == -1)
         return (-1);
     if (read_map(fd, cub3d) == -1)
         return (-1);
+    print_cub3d(cub3d);
+    return (0);
 }

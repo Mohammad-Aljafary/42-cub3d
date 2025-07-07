@@ -1,3 +1,4 @@
 SRC= main.c \
-	checks.c 
+	checks.c \
+	print.c 
      

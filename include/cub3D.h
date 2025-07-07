@@ -54,4 +54,10 @@ void free_textures(t_texture *head);
 int process_input(char *line, t_cub3d *cub3d);
 int read_texture(int fd, t_cub3d *cub3d);
 int valid_file(int argc, char **argv, t_cub3d *cub3d);
+void print_map(t_map *map);
+void print_textures(t_texture *textures);
+void print_cub3d(t_cub3d *cub3d);
+int border_map(char *line);
+int read_map(int fd, t_cub3d *cub3d);
+
 #endif
