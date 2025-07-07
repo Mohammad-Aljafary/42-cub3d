@@ -12,6 +12,24 @@ int check_extension(const char *filename, const char *extension)
     return (0);
 }
 
+int border_map(char *line)
+{
+    size_t len; 
+    size_t i;
+
+    len = ft_strlen(line);
+    i = 1;
+    if (len < 3)
+        return (0);
+    while (i < len - 1)
+    {
+        if (line[i] != '1' && line[i] != '0' && line[i] != ' ')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
 int process_input(char *line, t_cub3d *cub3d)
 {
     char *line_trimmed;
@@ -85,7 +103,7 @@ int process_input(char *line, t_cub3d *cub3d)
             ft_free_split(tokens);
             return (-1);
         }
-        add_map_node(&cub3d->map, new_map);
+        add_map_node(&cub3d->map, new_map);condition
         return (2);
     }
     return (0);
@@ -94,14 +112,21 @@ int process_input(char *line, t_cub3d *cub3d)
 int read_texture(int fd, t_cub3d *cub3d)
 {
     char *line;
+    int result;
 
     line = get_next_line(fd);
     while (line)
     {
-        if (process_input(line, cub3d) == -1)
+        result = process_input(line, cub3d);
+        if (result == -1)
         {
             free(line);
             return (-1);
+        }
+        else if (result == 2)
+        {
+            free(line);
+            break;
         }
         free (line);
         line = get_next_line(fd);
