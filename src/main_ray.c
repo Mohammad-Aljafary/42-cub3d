@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/06 20:59:03 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/07 20:28:48 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main_1(t_cub3d *cub3d)
         mlx_terminate(cub3d->mlx);
         return (-1);
     }
+    
     mlx_loop(cub3d->mlx);
     mlx_delete_image(cub3d->mlx, cub3d->img);
     mlx_terminate(cub3d->mlx);

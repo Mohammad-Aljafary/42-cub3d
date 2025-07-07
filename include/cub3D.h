@@ -36,11 +36,15 @@ typedef struct s_cub3d
     mlx_image_t *img;
     t_map *map;
     t_texture *textures;
-    int player_x;
-    int player_y;
     int map_width;
     int map_height;
+    float player_y;
+    float player_x;
     float player_angle;
+    float dir_x;
+    float dir_y;
+    float plane_x;
+    float plane_y;
 } t_cub3d;
 
 
