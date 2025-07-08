@@ -55,6 +55,8 @@ t_texture *create_node_texture(char *name, char *path, int red, int green, int b
     new_node->red = red;
     new_node->green = green;
     new_node->blue = blue;
+    new_node->img = NULL;
+    new_node->mlx_texture = NULL;
     new_node->next = NULL;
     return (new_node);
 }

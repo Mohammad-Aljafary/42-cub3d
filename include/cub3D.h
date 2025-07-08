@@ -20,10 +20,23 @@ typedef struct s_map
     struct s_map *prev;
 } t_map;
 
+typedef struct s_xmp
+{
+    void *img;
+    char *addr;
+    int width;
+    int height;
+    int bpp;
+    int line_length;
+    int endian;
+} t_xpm;
+
 typedef struct s_texture
 {
     char *name;
     char *path;
+    t_xpm *img;
+    mlx_texture_t *mlx_texture;
     int red;
     int green;
     int blue;
@@ -33,7 +46,6 @@ typedef struct s_texture
 typedef struct s_cub3d
 {
     mlx_t *mlx;
-    mlx_image_t *img;
     t_map *map;
     t_texture *textures;
     int map_width;
@@ -59,4 +71,5 @@ int process_input(char *line, t_cub3d *cub3d);
 int read_texture(int fd, t_cub3d *cub3d);
 int valid_file(int argc, char **argv, t_cub3d *cub3d);
 int main_1(t_cub3d *cub3d);
+void start_dda(t_cub3d *cub3d, mlx_image_t *img);
 #endif
