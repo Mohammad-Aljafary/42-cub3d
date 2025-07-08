@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 14:41:10 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/08 14:44:54 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,24 @@ void key_hook(mlx_key_data_t keydata, void *param)
         {
             float new_x = cub3d->player_x - cub3d->dir_x * move_speed;
             float new_y = cub3d->player_y - cub3d->dir_y * move_speed;
+            if (get_map_char(cub3d, (int)new_x, (int)cub3d->player_y) != '1')
+                cub3d->player_x = new_x;
+            if (get_map_char(cub3d, (int)cub3d->player_x, (int)new_y) != '1')
+                cub3d->player_y = new_y;
+        }
+        else if (keydata.key == MLX_KEY_A)
+        {
+            float new_x = cub3d->player_x + cub3d->dir_y * move_speed;
+            float new_y = cub3d->player_y - cub3d->dir_x * move_speed;
+            if (get_map_char(cub3d, (int)new_x, (int)cub3d->player_y) != '1')
+                cub3d->player_x = new_x;
+            if (get_map_char(cub3d, (int)cub3d->player_x, (int)new_y) != '1')
+                cub3d->player_y = new_y;
+        }
+        else if (keydata.key == MLX_KEY_D)
+        {
+            float new_x = cub3d->player_x - cub3d->dir_y * move_speed;
+            float new_y = cub3d->player_y + cub3d->dir_x * move_speed;
             if (get_map_char(cub3d, (int)new_x, (int)cub3d->player_y) != '1')
                 cub3d->player_x = new_x;
             if (get_map_char(cub3d, (int)cub3d->player_x, (int)new_y) != '1')
