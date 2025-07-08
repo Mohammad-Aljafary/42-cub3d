@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 18:46:47 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/08 18:58:26 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,13 @@ void print_floor_and_ceiling(t_cub3d *cub3d, t_dda *dda)
     t_texture *floor_texture;
     t_texture *ceiling_texture;
     int y;
-    unsigned long long   color_c;
-    unsigned long long   color_f;
+    unsigned int color_c;
+    unsigned int color_f;
 
     floor_texture = get_name_texture(cub3d->textures, "F");
     ceiling_texture = get_name_texture(cub3d->textures, "C");
-    color_c = (unsigned long long)(floor_texture->red << 16 | floor_texture->green << 8 | floor_texture->blue);
-    color_f = (unsigned long long)(ceiling_texture->red << 16 | ceiling_texture->green << 8 | ceiling_texture->blue);
+    color_c = (ceiling_texture->red << 24) | (ceiling_texture->green << 16) | (ceiling_texture->blue << 8) | 0xFF;
+    color_f = (floor_texture->red << 24) | (floor_texture->green << 16) | (floor_texture->blue << 8) | 0xFF;
     y = -1;
     while (++y < cub3d->map_height)
     {
