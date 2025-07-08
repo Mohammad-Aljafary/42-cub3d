@@ -38,10 +38,9 @@ int main(int argc, char** argv)
     ft_memset(cub3d, 0, sizeof(t_cub3d));
     if (valid_file(argc, argv, cub3d) == -1)
     {
-        free(cub3d);
+        free_cub3d(cub3d);
         fprintf(stderr, "Error: Invalid file or arguments.\n");
         return (EXIT_FAILURE);
     }
-    free_textures(cub3d->textures);
-    free (cub3d);
+    free_cub3d(cub3d);
 }

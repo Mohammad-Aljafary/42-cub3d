@@ -87,3 +87,11 @@ void free_textures(t_texture *head)
         free(temp);
     }
 }
+
+
+void    free_cub3d(t_cub3d *cub3d)
+{
+    free_map(cub3d->map);
+    free_textures(cub3d->textures);
+    free (cub3d);
+}

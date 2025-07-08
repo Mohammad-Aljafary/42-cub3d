@@ -8,8 +8,7 @@ void print_map(t_map *map)
     printf("Map:\n");
     while (current)
     {
-        ft_putstr_fd(current->data, STDOUT_FILENO);
-        ft_putchar_fd('\n', STDOUT_FILENO);
+        printf("%s\n", current->data);
         current = current->next;
     }
 }

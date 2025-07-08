@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: malja-fa <malja-fa@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:48:46 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/05/14 14:16:23 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/07/08 12:47:50 by malja-fa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,12 @@ void	ft_free_split(char **str)
 	int	i;
 
 	i = 0;
-	if (!str)
+	if (!str || !*str)
 		return ;
 	while (str[i])
 	{
 		free(str[i]);
 		i++;
 	}
-	if (str)
-		free(str);
+	free(str);
 }

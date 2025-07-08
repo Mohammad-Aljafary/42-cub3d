@@ -46,6 +46,8 @@ typedef struct s_cub3d
 
 
 int check_extension(const char *filename, const char *extension);
+int check_dir_text(char **token, t_cub3d *cub3d);
+int check_color(char **token, t_cub3d *cub3d);
 int read_file(int fd, t_cub3d *cub3d);
 t_texture *create_node_texture(char *name, char *path, int red, int green, int blue);
 void add_node_texture(t_texture **head, t_texture *new_node);
@@ -61,5 +63,5 @@ void print_textures(t_texture *textures);
 void print_cub3d(t_cub3d *cub3d);
 int border_map(char *line);
 int read_map(int fd, t_cub3d *cub3d);
-
+void    free_cub3d(t_cub3d *cub3d);
 #endif
