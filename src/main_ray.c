@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 11:36:55 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/08 14:41:10 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ void key_hook(mlx_key_data_t keydata, void *param)
             if (get_map_char(cub3d, (int)cub3d->player_x, (int)new_y) != '1')
                 cub3d->player_y = new_y;
         }
-        else if (keydata.key == MLX_KEY_A)
+        else if (keydata.key == MLX_KEY_RIGHT)
         {
             float old_dir_x = cub3d->dir_x;
             cub3d->dir_x = cub3d->dir_x * cos(rot_speed) - cub3d->dir_y * sin(rot_speed);
@@ -166,7 +166,7 @@ void key_hook(mlx_key_data_t keydata, void *param)
             cub3d->plane_x = cub3d->plane_x * cos(rot_speed) - cub3d->plane_y * sin(rot_speed);
             cub3d->plane_y = old_plane_x * sin(rot_speed) + cub3d->plane_y * cos(rot_speed);
         }
-        else if (keydata.key == MLX_KEY_D)
+        else if (keydata.key == MLX_KEY_LEFT)
         {
             float old_dir_x = cub3d->dir_x;
             cub3d->dir_x = cub3d->dir_x * cos(-rot_speed) - cub3d->dir_y * sin(-rot_speed);
