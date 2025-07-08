@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 17:34:20 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/08 17:47:44 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ void print_texture(t_cub3d *cub3d, t_texture *texture, t_dda dda, int draw_start
     int color;
     int y;
 
-    tex_x = (int)(texture->xpm->width * (dda.perp_wall_dist - floor(dda.perp_wall_dist)));
+    tex_x = (int)(texture->xpm->texture.width * (dda.perp_wall_dist - floor(dda.perp_wall_dist)));
     y = draw_start - 1;
     while (++y < draw_end)
     {
-        tex_y = (int)((y - cub3d->map_height / 2 + dda.perp_wall_dist) * texture->height / dda.perp_wall_dist);
-        if (tex_y >= texture->height)
+        tex_y = (int)((y - cub3d->map_height / 2 + dda.perp_wall_dist) * texture->xpm->texture.height / dda.perp_wall_dist);
+        if (tex_y >= texture->xpm->texture.height)
             continue;
-        color = texture->pixels[tex_y * texture->width + tex_x];
+        color = texture->xpm->texture.pixels[tex_y * texture->xpm->texture.width + tex_x];
         mlx_put_pixel(cub3d->img, dda.x, y, color);
     }
 }

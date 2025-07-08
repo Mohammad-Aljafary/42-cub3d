@@ -91,13 +91,16 @@ void free_textures(t_texture *head)
 
 t_texture *get_name_texture(t_texture *texture, char *name)
 {
+    t_texture *current;
+
+    current = texture;
     if (!texture || !name)
         return (NULL);
-    while (texture)
+    while (current)
     {
-        if (ft_strcmp(texture->name, name) == 0)
-            return (texture);
-        texture = texture->next;
+        if (ft_strcmp(current->name, name) == 0)
+            return (current);
+        current = current->next;
     }
     return (NULL);
 }

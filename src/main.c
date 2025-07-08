@@ -28,25 +28,17 @@ int main()
         return (1);
     }
     cub3d->textures = NULL;
-    cub3d->textures = create_node_texture("NO", "wall/wall_1.xpm", 0, 0, 0);
-    if (!cub3d->textures)
-    {
-        printf("Failed to create texture node\n");
-        mlx_terminate(cub3d->mlx);
-        free(cub3d);
-        return (1);
-    }
-    cub3d->textures = create_node_texture("SO", "wall/wall_3.xpm", 0, 0, 0);
+    cub3d->textures = create_node_texture("NO", "wall/wall_1.xpm42", 0, 0, 0);
     cub3d->textures->xpm = mlx_load_xpm42(cub3d->textures->path);
-    cub3d->textures->next = create_node_texture("WE", "wall/wall_4.xpm", 0, 0, 0);
+    printf("%p\n", cub3d->textures->xpm);
+    cub3d->textures->next = create_node_texture("SO", "wall/wall_3.xpm42", 0, 0, 0);
     cub3d->textures->next->xpm = mlx_load_xpm42(cub3d->textures->next->path);
-    cub3d->textures->next->next = create_node_texture("EA", "wall/wood.xpm", 0, 0, 0);
+    cub3d->textures->next->next = create_node_texture("WE", "wall/wall_4.xpm42", 0, 0, 0);
     cub3d->textures->next->next->xpm = mlx_load_xpm42(cub3d->textures->next->next->path);
-    cub3d->textures->next->next->next = create_node_texture("NO", "wall/wall_2.xpm", 0, 0, 0);
+    cub3d->textures->next->next->next = create_node_texture("EA", "wall/wood.xpm42", 0, 0, 0);
     cub3d->textures->next->next->next->xpm = mlx_load_xpm42(cub3d->textures->next->next->next->path);
     cub3d->textures->next->next->next->next = create_node_texture("F", NULL, 120, 120, 120);
     cub3d->textures->next->next->next->next->next = create_node_texture("C", NULL, 50, 50, 50);
-    cub3d->textures->next->next->next->next->next->next = NULL;
     cub3d->map = NULL;
     add_node_map(&cub3d->map, create_node_map("1111111111", 0));
     add_node_map(&cub3d->map, create_node_map("1000000001", 1));
