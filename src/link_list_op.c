@@ -55,7 +55,6 @@ t_texture *create_node_texture(char *name, char *path, int red, int green, int b
     new_node->red = red;
     new_node->green = green;
     new_node->blue = blue;
-    new_node->img = NULL;
     new_node->mlx_texture = NULL;
     new_node->next = NULL;
     return (new_node);
@@ -88,4 +87,17 @@ void free_textures(t_texture *head)
         free(temp->path);
         free(temp);
     }
+}
+
+t_texture *get_name_texture(t_texture *texture, char *name)
+{
+    if (!texture || !name)
+        return (NULL);
+    while (texture)
+    {
+        if (ft_strcmp(texture->name, name) == 0)
+            return (texture);
+        texture = texture->next;
+    }
+    return (NULL);
 }

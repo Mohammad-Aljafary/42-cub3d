@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:33:20 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 15:41:02 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/08 17:21:11 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,25 @@ typedef struct s_map
     struct s_map *next;
     struct s_map *prev;
 } t_map;
+
+typedef struct s_dda
+{
+    int x;
+    float camera_x;
+    float ray_dir_x;
+    float ray_dir_y;
+    int map_x;
+    int map_y;
+    float side_dist_x;
+    float side_dist_y;
+    float delta_dist_x;
+    float delta_dist_y;
+    int step_x;
+    int step_y;
+    int hit;
+    int side;
+    float perp_wall_dist;
+}   t_dda;
 
 typedef struct s_texture
 {
@@ -73,5 +92,6 @@ int process_input(char *line, t_cub3d *cub3d);
 int read_texture(int fd, t_cub3d *cub3d);
 int valid_file(int argc, char **argv, t_cub3d *cub3d);
 int main_1(t_cub3d *cub3d);
-void start_dda(t_cub3d *cub3d, mlx_image_t *img);
+void start_dda(t_cub3d *cub3d);
+t_texture *get_name_texture(t_texture *textures, char *name);
 #endif
