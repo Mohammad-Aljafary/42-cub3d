@@ -45,9 +45,9 @@ int main()
     cub3d->map = NULL;
     add_node_map(&cub3d->map, create_node_map("1111111111", 0));
     add_node_map(&cub3d->map, create_node_map("1000000001", 1));
-    add_node_map(&cub3d->map, create_node_map("1001111001", 2));
-    add_node_map(&cub3d->map, create_node_map("1000000001", 3));
-    add_node_map(&cub3d->map, create_node_map("1001111001", 4));
+    add_node_map(&cub3d->map, create_node_map("1000000101", 2));
+    add_node_map(&cub3d->map, create_node_map("1000000101", 3));
+    add_node_map(&cub3d->map, create_node_map("1000000101", 4));
     add_node_map(&cub3d->map, create_node_map("1000000001", 5));
     add_node_map(&cub3d->map, create_node_map("1111111111", 6));
     
