@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 09:39:53 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/08 11:36:55 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ void start_dda(t_cub3d *cub3d, mlx_image_t *img)
     int step_x;
     int step_y;
     int hit;
+    int side;
     float perp_wall_dist;
+
     x = 0;
     while (x < cub3d->map_width)
     {
@@ -49,8 +51,14 @@ void start_dda(t_cub3d *cub3d, mlx_image_t *img)
         ray_dir_y = cub3d->dir_y + cub3d->plane_y * camera_x;
         map_x = (int)cub3d->player_x;
         map_y = (int)cub3d->player_y;
-        delta_dist_x = fabs(1 / ray_dir_x);
-        delta_dist_y = fabs(1 / ray_dir_y);
+        if (ray_dir_x == 0)
+            delta_dist_x = 1e30;
+        else
+            delta_dist_x = fabs(1 / ray_dir_x);
+        if (ray_dir_y == 0)
+            delta_dist_y = 1e30;
+        else
+            delta_dist_y = fabs(1 / ray_dir_y);
         if (ray_dir_x < 0)
         {
             step_x = -1;
@@ -78,18 +86,18 @@ void start_dda(t_cub3d *cub3d, mlx_image_t *img)
             {
                 side_dist_x += delta_dist_x;
                 map_x += step_x;
-                if (get_map_char(cub3d, map_x, map_y) == '1')
-                    hit = 1;
+                side = 0;
             }
             else
             {
                 side_dist_y += delta_dist_y;
                 map_y += step_y;
-                if (get_map_char(cub3d, map_x, map_y) == '1')
-                    hit = 1;
+                side = 1;
             }
+            if (get_map_char(cub3d, map_x, map_y) == '1')
+                hit = 1;
         }
-        if (side_dist_x < side_dist_y)
+        if (side == 0)
             perp_wall_dist = (map_x - cub3d->player_x + (1 - step_x) / 2) / ray_dir_x;
         else
             perp_wall_dist = (map_y - cub3d->player_y + (1 - step_y) / 2) / ray_dir_y;
@@ -100,8 +108,12 @@ void start_dda(t_cub3d *cub3d, mlx_image_t *img)
         int draw_end = line_height / 2 + cub3d->map_height / 2;
         if (draw_end >= cub3d->map_height)
             draw_end = cub3d->map_height - 1;
-        uint32_t color = 0xFF0000FF;
-        for (int y = draw_start; y < draw_end; y++)
+        long long color;
+        if (side == 1)
+            color = 0xFF0000FF;
+        else
+            color = 0x800000FF;
+        for (int y = draw_start; y <= draw_end; y++)
         {
             mlx_put_pixel(img, x, y, color);
         }
@@ -109,7 +121,7 @@ void start_dda(t_cub3d *cub3d, mlx_image_t *img)
         {
             mlx_put_pixel(img, x, y, 0x323232FF);
         }
-        for (int y = draw_end; y < cub3d->map_height; y++)
+        for (int y = draw_end + 1; y < cub3d->map_height; y++)
         {
             mlx_put_pixel(img, x, y, 0x787878FF);
         }
@@ -123,6 +135,56 @@ void key_hook(mlx_key_data_t keydata, void *param)
     
     if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
         mlx_close_window(cub3d->mlx);
+    if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
+    {
+        float move_speed = 0.1f;
+        float rot_speed = 0.05f;
+        if (keydata.key == MLX_KEY_W)
+        {
+            float new_x = cub3d->player_x + cub3d->dir_x * move_speed;
+            float new_y = cub3d->player_y + cub3d->dir_y * move_speed;
+            if (get_map_char(cub3d, (int)new_x, (int)cub3d->player_y) != '1')
+                cub3d->player_x = new_x;
+            if (get_map_char(cub3d, (int)cub3d->player_x, (int)new_y) != '1')
+                cub3d->player_y = new_y;
+        }
+        else if (keydata.key == MLX_KEY_S)
+        {
+            float new_x = cub3d->player_x - cub3d->dir_x * move_speed;
+            float new_y = cub3d->player_y - cub3d->dir_y * move_speed;
+            if (get_map_char(cub3d, (int)new_x, (int)cub3d->player_y) != '1')
+                cub3d->player_x = new_x;
+            if (get_map_char(cub3d, (int)cub3d->player_x, (int)new_y) != '1')
+                cub3d->player_y = new_y;
+        }
+        else if (keydata.key == MLX_KEY_A)
+        {
+            float old_dir_x = cub3d->dir_x;
+            cub3d->dir_x = cub3d->dir_x * cos(rot_speed) - cub3d->dir_y * sin(rot_speed);
+            cub3d->dir_y = old_dir_x * sin(rot_speed) + cub3d->dir_y * cos(rot_speed);
+            float old_plane_x = cub3d->plane_x;
+            cub3d->plane_x = cub3d->plane_x * cos(rot_speed) - cub3d->plane_y * sin(rot_speed);
+            cub3d->plane_y = old_plane_x * sin(rot_speed) + cub3d->plane_y * cos(rot_speed);
+        }
+        else if (keydata.key == MLX_KEY_D)
+        {
+            float old_dir_x = cub3d->dir_x;
+            cub3d->dir_x = cub3d->dir_x * cos(-rot_speed) - cub3d->dir_y * sin(-rot_speed);
+            cub3d->dir_y = old_dir_x * sin(-rot_speed) + cub3d->dir_y * cos(-rot_speed);
+            float old_plane_x = cub3d->plane_x;
+            cub3d->plane_x = cub3d->plane_x * cos(-rot_speed) - cub3d->plane_y * sin(-rot_speed);
+            cub3d->plane_y = old_plane_x * sin(-rot_speed) + cub3d->plane_y * cos(-rot_speed);
+        }
+    }
+}
+
+void render_loop(void *param)
+{
+    t_cub3d *cub3d = (t_cub3d *)param;
+    mlx_image_t *img = cub3d->img;
+    
+    memset(img->pixels, 0, img->width * img->height * sizeof(uint32_t));
+    start_dda(cub3d, img);
 }
 
 int main_1(t_cub3d *cub3d)
@@ -133,16 +195,16 @@ int main_1(t_cub3d *cub3d)
         printf("Failed to create image\n");
         return (1);
     }
+    cub3d->img = img;
     if (mlx_image_to_window(cub3d->mlx, img, 0, 0) == -1)
     {
         printf("Failed to put image to window\n");
         return (1);
     }
     mlx_key_hook(cub3d->mlx, key_hook, cub3d);
-    start_dda(cub3d, img);
+    mlx_loop_hook(cub3d->mlx, render_loop, cub3d);
     mlx_loop(cub3d->mlx);
     mlx_delete_image(cub3d->mlx, img);
     mlx_terminate(cub3d->mlx);
-    
     return (0);
 }
