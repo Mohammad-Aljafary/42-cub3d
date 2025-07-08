@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:33:20 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 17:21:11 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/08 18:40:29 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ typedef struct s_dda
     int hit;
     int side;
     float perp_wall_dist;
+    int line_height;
+    int draw_start;
+    int draw_end;
 }   t_dda;
 
 typedef struct s_texture

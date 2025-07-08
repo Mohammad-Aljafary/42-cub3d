@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 17:47:44 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/08 18:46:47 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,32 @@ char get_map_char(t_cub3d *cub3d, int x, int y)
     return current->data[x];
 }
 
-void print_texture(t_cub3d *cub3d, t_texture *texture, t_dda dda, int draw_start, int draw_end)
+void print_texture(t_cub3d *cub3d, t_texture *texture, t_dda *dda, double wall_x)
 {
-    unsigned int tex_x;
-    unsigned int tex_y = 1;
-    int color;
+    int tex_x = (int)(wall_x * (double)texture->xpm->texture.width);
+    int tex_y;
+    if (dda->side == 0 && dda->ray_dir_x > 0)
+        tex_x = texture->xpm->texture.width - tex_x - 1;
+    if (dda->side == 1 && dda->ray_dir_y < 0)
+        tex_x = texture->xpm->texture.width - tex_x - 1;
+    double step = 1.0 * texture->xpm->texture.height / dda->line_height;
+    double tex_pos = (dda->draw_start - cub3d->map_height / 2 + dda->line_height / 2) * step;
     int y;
 
-    tex_x = (int)(texture->xpm->texture.width * (dda.perp_wall_dist - floor(dda.perp_wall_dist)));
-    y = draw_start - 1;
-    while (++y < draw_end)
+    tex_x = (int)(texture->xpm->texture.width * (wall_x));
+    y = dda->draw_start - 1;
+    while (++y < dda->draw_end)
     {
-        tex_y = (int)((y - cub3d->map_height / 2 + dda.perp_wall_dist) * texture->xpm->texture.height / dda.perp_wall_dist);
-        if (tex_y >= texture->xpm->texture.height)
-            continue;
-        color = texture->xpm->texture.pixels[tex_y * texture->xpm->texture.width + tex_x];
-        mlx_put_pixel(cub3d->img, dda.x, y, color);
+        tex_y = (int)tex_pos & (texture->xpm->texture.height - 1);
+                tex_pos += step;
+                
+        unsigned char *pixel = &texture->xpm->texture.pixels[(tex_y * texture->xpm->texture.width + tex_x) * 4];
+        int color = (pixel[0] << 24) | (pixel[1] << 16) | (pixel[2] << 8) | pixel[3];
+        mlx_put_pixel(cub3d->img, dda->x, y, color);
     }
 }
 
-void print_floor_and_ceiling(t_cub3d *cub3d, int x, int draw_start, int draw_end)
+void print_floor_and_ceiling(t_cub3d *cub3d, t_dda *dda)
 {
     t_texture *floor_texture;
     t_texture *ceiling_texture;
@@ -59,43 +65,43 @@ void print_floor_and_ceiling(t_cub3d *cub3d, int x, int draw_start, int draw_end
     y = -1;
     while (++y < cub3d->map_height)
     {
-        if (y < draw_start)
+        if (y < dda->draw_start)
         {
-            mlx_put_pixel(cub3d->img, x, y, color_c);
+            mlx_put_pixel(cub3d->img, dda->x, y, color_c);
         }
-        else if (y >= draw_end)
+        else if (y >= dda->draw_end)
         {
-            mlx_put_pixel(cub3d->img, x, y, color_f);
+            mlx_put_pixel(cub3d->img, dda->x, y, color_f);
         }
     }
 }
 
-void start_drawing(t_cub3d *cub3d, t_dda dda, int draw_start, int draw_end)
+void start_drawing(t_cub3d *cub3d, t_dda *dda)
 {
     double wall_x;
     t_texture *texture;
 
-    if (dda.side == 0)
-        wall_x = cub3d->player_y + dda.perp_wall_dist * dda.ray_dir_y;
+    if (dda->side == 0)
+        wall_x = cub3d->player_y + dda->perp_wall_dist * dda->ray_dir_y;
     else
-        wall_x = cub3d->player_x + dda.perp_wall_dist * dda.ray_dir_x;
+        wall_x = cub3d->player_x + dda->perp_wall_dist * dda->ray_dir_x;
     wall_x -= floor(wall_x);
-    if (dda.side == 0)
+    if (dda->side == 0)
     {
-        if (dda.ray_dir_x < 0)
+        if (dda->ray_dir_x < 0)
             texture = get_name_texture(cub3d->textures, "WE");
         else
             texture = get_name_texture(cub3d->textures, "EA");
     }
     else
     {
-        if (dda.ray_dir_y < 0)
+        if (dda->ray_dir_y < 0)
             texture = get_name_texture(cub3d->textures, "NO");
         else
             texture = get_name_texture(cub3d->textures, "SO");
     }
-    print_texture(cub3d, texture, dda, draw_start, draw_end);
-    print_floor_and_ceiling(cub3d, dda.x, draw_start, draw_end);
+    print_texture(cub3d, texture, dda, wall_x);
+    print_floor_and_ceiling(cub3d, dda);
 }
 
 void start_dda(t_cub3d *cub3d)
@@ -160,14 +166,14 @@ void start_dda(t_cub3d *cub3d)
             dda.perp_wall_dist = (dda.map_x - cub3d->player_x + (1 - dda.step_x) / 2) / dda.ray_dir_x;
         else
             dda.perp_wall_dist = (dda.map_y - cub3d->player_y + (1 - dda.step_y) / 2) / dda.ray_dir_y;
-        int line_height = (int)(cub3d->map_height / dda.perp_wall_dist);
-        int draw_start = -line_height / 2 + cub3d->map_height / 2;
-        if (draw_start < 0)
-            draw_start = 0;
-        int draw_end = line_height / 2 + cub3d->map_height / 2;
-        if (draw_end >= cub3d->map_height)
-            draw_end = cub3d->map_height - 1;
-        start_drawing(cub3d, dda, draw_start, draw_end);
+        dda.line_height = (int)(cub3d->map_height / dda.perp_wall_dist);
+        dda.draw_start = -dda.line_height / 2 + cub3d->map_height / 2;
+        if (dda.draw_start < 0)
+            dda.draw_start = 0;
+        dda.draw_end = dda.line_height / 2 + cub3d->map_height / 2;
+        if (dda.draw_end >= cub3d->map_height)
+            dda.draw_end = cub3d->map_height - 1;
+        start_drawing(cub3d, &dda);
         dda.x++;
     }
 }
