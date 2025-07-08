@@ -9,7 +9,7 @@ int main()
         printf("Failed to allocate memory for cub3d\n");
         return (1);
     }
-    printf("Memory allocated for cub3d\n");
+    // printf("Memory allocated for cub3d\n");
     ft_memset(cub3d, 0, sizeof(t_cub3d));
     cub3d->map_width = 800;
     cub3d->map_height = 600;
@@ -36,9 +36,14 @@ int main()
         free(cub3d);
         return (1);
     }
-    cub3d->textures->next = create_node_texture("SO", "wall/wall_3.xpm", 0, 0, 0);
-    cub3d->textures->next->next = create_node_texture("WE", "wall/wall_4.xpm", 0, 0, 0);
-    cub3d->textures->next->next->next = create_node_texture("EA", "wall/wood.xpm", 0, 0, 0);
+    cub3d->textures = create_node_texture("SO", "wall/wall_3.xpm", 0, 0, 0);
+    cub3d->textures->xpm = mlx_load_xpm42(cub3d->textures->path);
+    cub3d->textures->next = create_node_texture("WE", "wall/wall_4.xpm", 0, 0, 0);
+    cub3d->textures->next->xpm = mlx_load_xpm42(cub3d->textures->next->path);
+    cub3d->textures->next->next = create_node_texture("EA", "wall/wood.xpm", 0, 0, 0);
+    cub3d->textures->next->next->xpm = mlx_load_xpm42(cub3d->textures->next->next->path);
+    cub3d->textures->next->next->next = create_node_texture("NO", "wall/wall_2.xpm", 0, 0, 0);
+    cub3d->textures->next->next->next->xpm = mlx_load_xpm42(cub3d->textures->next->next->next->path);
     cub3d->textures->next->next->next->next = create_node_texture("F", NULL, 120, 120, 120);
     cub3d->textures->next->next->next->next->next = create_node_texture("C", NULL, 50, 50, 50);
     cub3d->textures->next->next->next->next->next->next = NULL;

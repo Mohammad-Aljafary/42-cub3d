@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 14:44:54 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/08 15:42:30 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ char get_map_char(t_cub3d *cub3d, int x, int y)
 
 void start_dda(t_cub3d *cub3d, mlx_image_t *img)
 {
+    // (void)img;
     int x;
     float camera_x;
     float ray_dir_x;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/08 15:33:20 by yaman-alrif       #+#    #+#             */
+/*   Updated: 2025/07/08 15:41:02 by yaman-alrif      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -20,22 +32,11 @@ typedef struct s_map
     struct s_map *prev;
 } t_map;
 
-typedef struct s_xmp
-{
-    void *img;
-    char *addr;
-    int width;
-    int height;
-    int bpp;
-    int line_length;
-    int endian;
-} t_xpm;
-
 typedef struct s_texture
 {
     char *name;
     char *path;
-    t_xpm *img;
+    xpm_t *xpm;
     mlx_texture_t *mlx_texture;
     int red;
     int green;
