@@ -23,7 +23,7 @@ $(LIBFT_A):
 	$(MAKE) -C $(LIBFT)
 
 $(MLX_A):
-	$(MAKE) -C $(MLX)/build
+	$(MAKE) -C $(MLX)/build && make -C $(MLX)/build -j4
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
