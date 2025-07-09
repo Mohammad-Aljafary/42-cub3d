@@ -6,12 +6,12 @@ int     valid_file(int argc, char** argv, t_cub3d *cub3d)
 
     if (argc != 2)
     {
-        fprintf(stderr, "Usage: %s <map_file>\n", argv[0]);
+        ft_fprintf(2, "Usage: %s <map_file>\n", argv[0]);
         return (-1);
     }
     if (check_extension(argv[1], ".cub") == -1)
     {
-        fprintf(stderr, "Error: Invalid file extension. Expected .cub file.\n");
+        ft_fprintf(2, "Error: Invalid file extension. Expected .cub file.\n");
         return (-1);
     }
     fd = open(argv[1], O_RDONLY);
@@ -23,7 +23,6 @@ int     valid_file(int argc, char** argv, t_cub3d *cub3d)
     if (read_file(fd, cub3d) == -1)
     {
         close(fd);
-        fprintf(stderr, "Error reading file.\n");
         return (-1);
     }
     close(fd);
@@ -39,7 +38,6 @@ int main(int argc, char** argv)
     if (valid_file(argc, argv, cub3d) == -1)
     {
         free_cub3d(cub3d);
-        fprintf(stderr, "Error: Invalid file or arguments.\n");
         return (EXIT_FAILURE);
     }
     free_cub3d(cub3d);

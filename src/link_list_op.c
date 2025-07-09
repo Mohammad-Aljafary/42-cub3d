@@ -49,8 +49,14 @@ t_texture *create_node_texture(char *name, char *path, int red, int green, int b
 
     new_node = malloc(sizeof(t_texture));
     if (!new_node)
+
         return (NULL);
     new_node->name = name;
+    if (!new_node->name)
+    {
+        free(new_node);
+        return (NULL);
+    }
     new_node->path = path;
     new_node->red = red;
     new_node->green = green;

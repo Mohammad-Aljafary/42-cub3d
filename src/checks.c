@@ -140,6 +140,11 @@ int read_map (int fd, t_cub3d *cub3d)
     while (line)
     {
         del_new_line(&line);
+        if (line[0] == '\0')
+        {
+            free(line);
+            return (-1);
+        }
         if (ft_strcmp(line, "\n") == 0 || ft_strcmp(line, "\r\n") == 0)
         {
             free(line);
@@ -177,7 +182,9 @@ int read_file(int fd, t_cub3d *cub3d)
     }
     if (is_all_text_exist(cub3d) == -1)
         return (-1);
-    if (open_textures(cub3d) == -1)
+   /*  if (open_textures(cub3d) == -1)
+        return (-1); */
+    if (check_map(cub3d) == -1)
         return (-1);
     print_cub3d(cub3d);
     return (0);

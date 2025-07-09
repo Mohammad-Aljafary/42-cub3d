@@ -13,6 +13,8 @@
 # include <libft.h>
 # include "../libft/includes/get_next_line.h"
 
+
+#define PI 3.14159265358979323846
 typedef struct s_map 
 {
     char *data;
@@ -25,6 +27,7 @@ typedef struct s_texture
 {
     char *name;
     char *path;
+    char **tokens;
     int red;
     int green;
     int blue;
@@ -46,8 +49,8 @@ typedef struct s_cub3d
 
 
 int check_extension(const char *filename, const char *extension);
-int check_dir_text(char **token, t_cub3d *cub3d);
-int check_color(char **token, t_cub3d *cub3d);
+int check_dir_text(char **tokens, t_cub3d *cub3d);
+int check_color(char **tokens, t_cub3d *cub3d);
 int is_all_text_exist(t_cub3d *cub3d);
 int read_file(int fd, t_cub3d *cub3d);
 t_texture *create_node_texture(char *name, char *path, int red, int green, int blue);
@@ -66,4 +69,5 @@ int border_map(char *line);
 int read_map(int fd, t_cub3d *cub3d);
 void    free_cub3d(t_cub3d *cub3d);
 int open_textures(t_cub3d *cub3d);
+int check_map(t_cub3d *cub3d);
 #endif
