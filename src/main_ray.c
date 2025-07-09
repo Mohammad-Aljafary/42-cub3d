@@ -224,15 +224,15 @@ void	key_hook(void *param)
 		mlx_close_window(cub3d->mlx);
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_W))
 		move(cub3d->player_x + cub3d->dir_x * 0.1f, cub3d->player_y + cub3d->dir_y * 0.1f, cub3d);
-	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_S))
 		move(cub3d->player_x - cub3d->dir_x * 0.1f, cub3d->player_y - cub3d->dir_y * 0.1f, cub3d);
-	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_A))
 		move(cub3d->player_x + cub3d->dir_y * 0.1f, cub3d->player_y - cub3d->dir_x * 0.1f, cub3d);
-	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_D))
 		move(cub3d->player_x - cub3d->dir_y * 0.1f, cub3d->player_y + cub3d->dir_x * 0.1f, cub3d);
-	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_RIGHT))
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_RIGHT))
 		rotate(cub3d->dir_x, cub3d->plane_x, 0.05, cub3d);
-	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_LEFT))
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_LEFT))
 		rotate(cub3d->dir_x, cub3d->plane_x, -0.05, cub3d);
 }
 
