@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "cub3d.h": "c"
-    }
+    },
+    "cmake.sourceDirectory": "/home/yaman-alrifai/42-cub3d/MLX42"
 }

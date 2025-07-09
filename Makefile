@@ -23,7 +23,7 @@ $(LIBFT_A):
 	$(MAKE) -C $(LIBFT)
 
 $(MLX_A):
-	cmake -B $(MLX)/build $(MLX); \
+	cmake -B $(MLX)/build $(MLX);
 	cmake --build $(MLX)/build -j4
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
@@ -32,18 +32,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	$(MAKE) -C $(LIBFT) clean
-	@if [ -d "$(MLX)/build" ]; then \
-		echo "Cleaning MLX42 build..."; \
-		cmake --build $(MLX)/build --target clean; \
-	fi
+	cmake --build $(MLX)/build --target clean; \
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
-	@if [ -d "$(MLX)/build" ]; then \
-		echo "Removing MLX42 build directory..."; \
-		rm -rf $(MLX)/build; \
-	fi
+	rm -rf $(MLX)/build;
 	rm -f $(NAME)
 
 re: fclean all
