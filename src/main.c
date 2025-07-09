@@ -37,7 +37,7 @@ int main()
     cub3d->textures->next->next->next = create_node_texture("EA", "wall/wood.xpm42", 0, 0, 0);
     cub3d->textures->next->next->next->xpm = mlx_load_xpm42(cub3d->textures->next->next->next->path);
     cub3d->textures->next->next->next->next = create_node_texture("F", NULL, 100, 100, 100);
-    cub3d->textures->next->next->next->next->next = create_node_texture("C", NULL, 0, 255, 0);
+    cub3d->textures->next->next->next->next->next = create_node_texture("C", NULL, 190, 189, 200);
     cub3d->map = NULL;
     add_node_map(&cub3d->map, create_node_map("1111111111", 0));
     add_node_map(&cub3d->map, create_node_map("10000000011111111111111111", 1));
