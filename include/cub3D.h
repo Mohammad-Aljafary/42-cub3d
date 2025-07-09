@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:33:20 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/08 18:40:29 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/09 09:56:14 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,17 @@ typedef struct s_map
     struct s_map *next;
     struct s_map *prev;
 } t_map;
+
+typedef struct s_tex_help
+{
+    int				tex_x;
+	int				tex_y;
+	int				y;
+	double			step;
+	double			tex_pos;
+	unsigned char	*pixel;
+	int				color;
+} t_tex_help;
 
 typedef struct s_dda
 {
