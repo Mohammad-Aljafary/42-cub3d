@@ -15,7 +15,7 @@ int main()
     cub3d->map_height = 600;
     cub3d->player_x = 4.5f;
     cub3d->player_y = 4.5f;
-    cub3d->player_angle = 1.5708f;
+    cub3d->player_angle = 0.0f;
     cub3d->dir_x = cos(cub3d->player_angle);
     cub3d->dir_y = sin(cub3d->player_angle);
     cub3d->plane_x = -cub3d->dir_y * 0.66f;
@@ -40,12 +40,12 @@ int main()
     cub3d->textures->next->next->next->next->next = create_node_texture("C", NULL, 0, 255, 0);
     cub3d->map = NULL;
     add_node_map(&cub3d->map, create_node_map("1111111111", 0));
-    add_node_map(&cub3d->map, create_node_map("1000000001", 1));
-    add_node_map(&cub3d->map, create_node_map("1000001101", 2));
-    add_node_map(&cub3d->map, create_node_map("1000000101", 3));
-    add_node_map(&cub3d->map, create_node_map("1000001101", 4));
-    add_node_map(&cub3d->map, create_node_map("1000000001", 5));
-    add_node_map(&cub3d->map, create_node_map("1111111111", 6));
+    add_node_map(&cub3d->map, create_node_map("10000000011111111111111111", 1));
+    add_node_map(&cub3d->map, create_node_map("10000011000000000000000001", 2));
+    add_node_map(&cub3d->map, create_node_map("10000000000000000000000001", 3));
+    add_node_map(&cub3d->map, create_node_map("10000011000000000000000001", 4));
+    add_node_map(&cub3d->map, create_node_map("10000000000000000000000001", 5));
+    add_node_map(&cub3d->map, create_node_map("11111111111111111111111111", 6));
     
     main_1(cub3d);
 
