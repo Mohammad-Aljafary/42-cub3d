@@ -35,9 +35,11 @@ int process_input(char *line, t_cub3d *cub3d)
     char *line_trimmed;
     char **tokens;
     t_map *new_map;
+    char *dup_line;
     int result;
 
     new_map = NULL;
+    dup_line = NULL;
     line_trimmed = ft_strtrim(line, " \t\n\r");
     if (!line_trimmed)
         return (-1);
@@ -72,7 +74,10 @@ int process_input(char *line, t_cub3d *cub3d)
         return (-1);
     else
     {
-        new_map = new_map_node(line, 1);
+        dup_line = ft_strdup(line);
+        if (!dup_line)
+            return (-1);
+        new_map = new_map_node(dup_line, 1);
         if (!new_map)
             return (-1);
         add_node_map(&cub3d->map, new_map);
@@ -171,6 +176,8 @@ int read_file(int fd, t_cub3d *cub3d)
         return (-1);
     }
     if (is_all_text_exist(cub3d) == -1)
+        return (-1);
+    if (open_textures(cub3d) == -1)
         return (-1);
     print_cub3d(cub3d);
     return (0);

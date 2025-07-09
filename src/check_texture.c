@@ -57,8 +57,69 @@ int check_color(char **token, t_cub3d *cub3d)
     return (0);
 }
 
-
 int is_all_text_exist(t_cub3d *cub3d)
 {
-    
+    int no_count;
+    int so_count;
+    int we_count;
+    int ea_count;
+    int color_count;
+    t_texture *temp;
+
+    no_count = 0;
+    so_count = 0;
+    we_count = 0;
+    ea_count = 0;
+    color_count = 0;
+    temp = cub3d->textures;
+    while (temp)
+    {
+        if (ft_strcmp(temp->name, "NO") == 0)
+            no_count++;
+        else if (ft_strcmp(temp->name, "SO") == 0)
+            so_count++;
+        else if (ft_strcmp(temp->name, "WE") == 0)
+            we_count++;
+        else if (ft_strcmp(temp->name, "EA") == 0)
+            ea_count++;
+        else if (ft_strcmp(temp->name, "F") == 0 
+                || ft_strcmp(temp->name, "C") == 0)
+            color_count++;
+        temp = temp->next;
+    }
+    if (no_count != 1 || so_count != 1 || we_count != 1 || ea_count != 1 || color_count < 2)
+    {
+        ft_fprintf(2, "Error: Missing or duplicate texture definitions.\n");
+        return (-1);
+    }
+    return (1);
+}
+
+int open_textures(t_cub3d *cub3d)
+{
+    t_texture *temp;
+    int fd;
+
+    temp = cub3d->textures;
+    fd = 0;
+    while (temp)
+    {
+        if (temp->path)
+        {
+            if (ft_strcmp(temp->name, "F") == 0 || ft_strcmp(temp->name, "C") == 0)
+            {
+                temp = temp->next;
+                continue;
+            }
+            fd = open(temp->path, O_RDONLY);
+            if (fd < 0)
+            {
+                ft_fprintf(2, "Error: Could not open texture file: %s\n", temp->path);
+                return (-1);
+            }
+            close(fd);
+        }
+        temp = temp->next;
+    }
+    return (0);
 }

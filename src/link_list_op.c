@@ -88,7 +88,6 @@ void free_textures(t_texture *head)
     }
 }
 
-
 void    free_cub3d(t_cub3d *cub3d)
 {
     free_map(cub3d->map);
