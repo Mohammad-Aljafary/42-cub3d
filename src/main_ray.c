@@ -215,28 +215,25 @@ void	rotate(float old_dir_x, float old_plane_x, float rot_speed, t_cub3d *cub3d)
 	cub3d->plane_y = old_plane_x * sin(rot_speed) + cub3d->plane_y * cos(rot_speed);
 }
 
-void	key_hook(mlx_key_data_t keydata, void *param)
+void	key_hook(void *param)
 {
 	t_cub3d	*cub3d;
 
 	cub3d = (t_cub3d *)param;
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(cub3d->mlx);
-	if (keydata.action == MLX_PRESS || keydata.action == MLX_REPEAT)
-	{
-		if (keydata.key == MLX_KEY_W)
-			move(cub3d->player_x + cub3d->dir_x * 0.1f, cub3d->player_y + cub3d->dir_y * 0.1f, cub3d);
-		else if (keydata.key == MLX_KEY_S)
-			move(cub3d->player_x - cub3d->dir_x * 0.1f, cub3d->player_y - cub3d->dir_y * 0.1f, cub3d);
-		else if (keydata.key == MLX_KEY_A)
-			move(cub3d->player_x + cub3d->dir_y * 0.1f, cub3d->player_y - cub3d->dir_x * 0.1f, cub3d);
-		else if (keydata.key == MLX_KEY_D)
-			move(cub3d->player_x - cub3d->dir_y * 0.1f, cub3d->player_y + cub3d->dir_x * 0.1f, cub3d);
-		else if (keydata.key == MLX_KEY_RIGHT)
-			rotate(cub3d->dir_x, cub3d->plane_x, 0.05, cub3d);
-		else if (keydata.key == MLX_KEY_LEFT)
-			rotate(cub3d->dir_x, cub3d->plane_x, -0.05, cub3d);
-	}
+	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_W))
+		move(cub3d->player_x + cub3d->dir_x * 0.1f, cub3d->player_y + cub3d->dir_y * 0.1f, cub3d);
+	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_S))
+		move(cub3d->player_x - cub3d->dir_x * 0.1f, cub3d->player_y - cub3d->dir_y * 0.1f, cub3d);
+	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_A))
+		move(cub3d->player_x + cub3d->dir_y * 0.1f, cub3d->player_y - cub3d->dir_x * 0.1f, cub3d);
+	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_D))
+		move(cub3d->player_x - cub3d->dir_y * 0.1f, cub3d->player_y + cub3d->dir_x * 0.1f, cub3d);
+	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_RIGHT))
+		rotate(cub3d->dir_x, cub3d->plane_x, 0.05, cub3d);
+	else if (mlx_is_key_down(cub3d->mlx, MLX_KEY_LEFT))
+		rotate(cub3d->dir_x, cub3d->plane_x, -0.05, cub3d);
 }
 
 void	render_loop(void *param)
@@ -262,7 +259,7 @@ int main_1(t_cub3d *cub3d)
         printf("Failed to put image to window\n");
         return (1);
     }
-    mlx_key_hook(cub3d->mlx, key_hook, cub3d);
+    mlx_loop_hook(cub3d->mlx, key_hook, cub3d);
     mlx_loop_hook(cub3d->mlx, render_loop, cub3d);
     mlx_loop(cub3d->mlx);
     mlx_delete_image(cub3d->mlx, cub3d->img);
