@@ -10,14 +10,17 @@ int check_dir_text(char **tokens, t_cub3d *cub3d)
     {
         if (tokens[1] && tokens[2] == NULL)
         {
-            new_texture = create_node_texture(tokens[0], tokens[1], -1, -1, -1);
+            new_texture = create_node_texture(tokens[0], tokens[1], tokens, -1, -1, -1);
             if (!new_texture)
                 return (-1);
             new_texture->next = cub3d->textures;
             cub3d->textures = new_texture;
         }
         else
+        {
+            ft_fprintf(2, "Error: multiple or no texture path\n");
             return (-1);
+        }
         return (1);
     }
     return (0);
@@ -44,14 +47,20 @@ int check_color(char **token, t_cub3d *cub3d)
             blue = ft_atoi(colors[2]);
             ft_free_split(colors);
             if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255)
+            {
+                ft_fprintf(2, "Error: RGB number should be between 0-255\n");
                 return (-1);
-            new_texture = create_node_texture(token[0], token[1], red, green, blue);
+            }
+            new_texture = create_node_texture(token[0], token[1], token, red, green, blue);
             if (!new_texture)
                 return (-1);
             add_node_texture(&cub3d->textures, new_texture);
         }
         else
+        {
+            ft_fprintf(2, "Error: the RGB number should be 3 numbers");
             return (-1);
+        }
         return (1);
     }
     return (0);

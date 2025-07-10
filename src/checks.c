@@ -54,24 +54,21 @@ int process_input(char *line, t_cub3d *cub3d)
         return (-1);
     result = check_dir_text(tokens, cub3d);
     if (result == -1)
-    {
-        ft_free_split(tokens);
         return (-1);
-    }
     else if (result)
         return (0);
     result = check_color(tokens, cub3d);
     if (result == -1)
-    {
-        ft_free_split(tokens);
         return (-1);
-    }
     else if (result == 1)
         return (0);
     ft_free_split(tokens);
     result = border_map (line);
     if (!result)
+    {
+        ft_fprintf(2, "Error: Invalid Texture\n");
         return (-1);
+    }
     else
     {
         dup_line = ft_strdup(line);

@@ -40,10 +40,8 @@ int check_player(t_map *map, t_cub3d *cub3d)
 
 int check_invalid_characters(t_map *map)
 {
-    int i;
     int j;
 
-    i = 0;
     while (map)
     {
         j = 0;
@@ -55,12 +53,11 @@ int check_invalid_characters(t_map *map)
                 map->data[j] != 'W')
             {
                 ft_fprintf(2, "Error: Invalid character '%c' in map at row %d.\n", 
-                           map->data[j], i + 1);
+                           map->data[j], map->row_num);
                 return (-1);
             }
             j++;
         }
-        i++;
         map = map->next;
     }
     return (1);
@@ -70,7 +67,7 @@ int element_exist(char *line, int index)
 {
     if (index < 0 || index >= (int)ft_strlen(line))
         return (0);
-    while (line[index])
+    while (index >= 0)
     {
         if (line[index] == '1' || line[index] == 'N' || 
             line[index] == 'S' || line[index] == 'E' || 
@@ -79,6 +76,28 @@ int element_exist(char *line, int index)
         index--;
     }
     return (0);
+}
+
+void fill_spaces (t_map *map)
+{
+    int j;
+
+    if (!map || !map->data)
+        return ;
+    while (map)
+    {
+        j = ft_strlen(map->data) - 1;
+        while (j >= 0)
+        {
+            if (map->data[j] == ' ')
+            {
+                if (element_exist(map->data, j) == 1)
+                    map->data[j] = '1';
+            }
+            j--;
+        }
+        map = map->next;
+    }
 }
 
 int check_surrounding(t_map *map, int index)
@@ -103,28 +122,6 @@ int check_surrounding(t_map *map, int index)
         map->next->data[index + 1] == '\0')
         return (-1);
     return (1);
-}
-
-void fill_spaces (t_map *map)
-{
-    int j;
-
-    if (!map || !map->data)
-        return ;
-    while (map)
-    {
-        j = ft_strlen(map->data) - 1;
-        while (j >= 0)
-        {
-            if (map->data[j] == ' ')
-            {
-                if (element_exist(map->data, j) == 1)
-                    map->data[j] = '1';
-            }
-            j--;
-        }
-        map = map->next;
-    }
 }
 
 int valid_border(t_map *map)
@@ -172,10 +169,42 @@ int valid_border(t_map *map)
     return (1);
 }
 
+int get_last_row(t_map *map)
+{
+    t_map *temp;
+
+    temp = map;
+    while (temp->next)
+        temp = temp->next;
+    return (temp->row_num);
+}
+
+int get_longest_row(t_map *map)
+{
+    t_map   *temp;
+    int len;
+
+    temp = map;
+    len = ft_strlen(temp->data);
+    while (temp)
+    {
+        if ((int)ft_strlen(temp->data) > len)
+            len = ft_strlen(temp->data);
+        temp = temp->next;
+    }
+    return (len);
+}
+
+void    set_height_width(t_cub3d *cub3d)
+{
+    cub3d->map_height = get_last_row(cub3d->map);
+    cub3d->map_width = get_longest_row(cub3d->map);
+}
+
 int check_map(t_cub3d *cub3d)
 {
     t_map *temp;
-    
+
     if (!cub3d || !cub3d->map)
     {
         ft_fprintf(2, "Error: Map is not initialized.\n");
@@ -183,20 +212,12 @@ int check_map(t_cub3d *cub3d)
     }
     temp = cub3d->map;
     if (check_player(temp, cub3d) == -1)
-    {
-        ft_fprintf(2, "Error: Player position is invalid.\n");
         return (-1);
-    }
     if (check_invalid_characters(temp) == -1)
-    {
-        ft_fprintf(2, "Error: Invalid characters in map.\n");
         return (-1);
-    }
     fill_spaces(temp);
     if (valid_border(temp) == -1)
-    {
-        ft_fprintf(2, "Error: Map borders are not valid.\n");
         return (-1);
-    }
-   return (1);
+    set_height_width(cub3d);
+    return (1);
 }

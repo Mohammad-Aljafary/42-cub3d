@@ -43,7 +43,7 @@ void free_map(t_map *head)
     }
 }
 
-t_texture *create_node_texture(char *name, char *path, int red, int green, int blue)
+t_texture *create_node_texture(char *name, char *path, char **tokens, int red, int green, int blue)
 {
     t_texture *new_node;
 
@@ -52,12 +52,8 @@ t_texture *create_node_texture(char *name, char *path, int red, int green, int b
 
         return (NULL);
     new_node->name = name;
-    if (!new_node->name)
-    {
-        free(new_node);
-        return (NULL);
-    }
     new_node->path = path;
+    new_node->tokens = tokens;
     new_node->red = red;
     new_node->green = green;
     new_node->blue = blue;
@@ -90,6 +86,7 @@ void free_textures(t_texture *head)
         head = head->next;
         free(temp->name);
         free(temp->path);
+        free(temp->tokens);
         free(temp);
     }
 }
