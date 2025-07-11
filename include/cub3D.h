@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:33:20 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/09 09:56:14 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/11 19:21:25 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ t_map *create_node_map(char *line, int row_num);
 void add_node_map(t_map **head, t_map *new_node);
 void free_map(t_map *head);
 void free_textures(t_texture *head);
+void free_cub3d(t_cub3d *cub3d);
 int process_input(char *line, t_cub3d *cub3d);
 int read_texture(int fd, t_cub3d *cub3d);
 int valid_file(int argc, char **argv, t_cub3d *cub3d);

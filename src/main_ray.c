@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/09 11:29:50 by yalrfai          ###   ########.fr       */
+/*   Updated: 2025/07/11 19:22:06 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,7 +221,11 @@ void	key_hook(void *param)
 
 	cub3d = (t_cub3d *)param;
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_ESCAPE))
+	{
 		mlx_close_window(cub3d->mlx);
+		free_cub3d(cub3d);
+		exit(0);
+	}
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_W))
 		move(cub3d->player_x + cub3d->dir_x * 0.1f, cub3d->player_y + cub3d->dir_y * 0.1f, cub3d);
 	if (mlx_is_key_down(cub3d->mlx, MLX_KEY_S))
@@ -262,7 +266,6 @@ int main_1(t_cub3d *cub3d)
     mlx_loop_hook(cub3d->mlx, key_hook, cub3d);
     mlx_loop_hook(cub3d->mlx, render_loop, cub3d);
     mlx_loop(cub3d->mlx);
-    mlx_delete_image(cub3d->mlx, cub3d->img);
-    mlx_terminate(cub3d->mlx);
+    free_cub3d(cub3d);
     return (0);
 }
