@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: taabu-fe <taabu-fe@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 12:10:21 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/04/23 17:22:31 by taabu-fe         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:27:57 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ int					ft_putchar(int c);
 int					ft_fprintf(int fd, const char *format, ...);
 int					ft_strcmp(const char *s1, const char *s2);
 void				ft_free_split(char **str);
+int					count_word(char *s, char c);
 #endif

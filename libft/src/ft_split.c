@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malja-fa <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:04:32 by malja-fa          #+#    #+#             */
-/*   Updated: 2024/08/28 17:04:34 by malja-fa         ###   ########.fr       */
+/*   Updated: 2025/07/09 18:22:33 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-static int	count_word(char *s, char c)
+int	count_word(char *s, char c)
 {
 	int	in_word;
 	int	count;

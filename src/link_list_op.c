@@ -1,6 +1,6 @@
 # include <cub3D.h>
 
-t_map *create_node_map (char *line, int row_num)
+t_map *new_map_node (char *line, int row_num)
 {
     t_map *new_node;
 
@@ -38,12 +38,12 @@ void free_map(t_map *head)
     {
         temp = head;
         head = head->next;
-        // free(temp->data);
+        free(temp->data);
         free(temp);
     }
 }
 
-t_texture *create_node_texture(char *name, char *path, int red, int green, int blue)
+t_texture *create_node_texture(char *name, char *path, char **tokens, int red, int green, int blue)
 {
     t_texture *new_node;
 
@@ -52,12 +52,11 @@ t_texture *create_node_texture(char *name, char *path, int red, int green, int b
         return (NULL);
     new_node->name = name;
     new_node->path = path;
+    new_node->tokens = tokens;
     new_node->red = red;
     new_node->green = green;
     new_node->blue = blue;
-    new_node->mlx_texture = NULL;
     new_node->next = NULL;
-    new_node->xpm = NULL;
     return (new_node);
 }
 
@@ -84,15 +83,15 @@ void free_textures(t_texture *head)
     {
         temp = head;
         head = head->next;
-        // if (temp->name)
-        //     free(temp->name);
-        // if (temp->path)
-        //     free(temp->path);
+        free(temp->name);
+        free(temp->path);
+        free(temp->tokens);
         if (temp->xpm)
             mlx_delete_xpm42(temp->xpm);
         free(temp);
     }
 }
+
 
 t_texture *get_name_texture(t_texture *texture, char *name)
 {

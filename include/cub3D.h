@@ -24,6 +24,11 @@
 # include <MLX42/MLX42_Int.h>
 # include <libft.h>
 
+# include "../libft/includes/get_next_line.h"
+
+
+#define PI 3.14159265358979323846
+
 typedef struct s_map 
 {
     char *data;
@@ -69,6 +74,7 @@ typedef struct s_texture
 {
     char *name;
     char *path;
+    char **tokens;
     xpm_t *xpm;
     mlx_texture_t *mlx_texture;
     int red;
@@ -96,6 +102,27 @@ typedef struct s_cub3d
 
 
 int check_extension(const char *filename, const char *extension);
+int check_dir_text(char **tokens, t_cub3d *cub3d);
+int check_color(char **tokens, t_cub3d *cub3d);
+int is_all_text_exist(t_cub3d *cub3d);
+int read_file(int fd, t_cub3d *cub3d);
+t_texture *create_node_texture(char *name, char *path, char **tokens, int red, int green, int blue);
+void add_node_texture(t_texture **head, t_texture *new_node);
+t_map *new_map_node (char *line, int row_num);
+void add_node_map(t_map **head, t_map *new_node);
+void free_map(t_map *head);
+void free_textures(t_texture *head);
+int process_input(char *line, t_cub3d *cub3d);
+int read_texture(int fd, t_cub3d *cub3d);
+int valid_file(int argc, char **argv, t_cub3d *cub3d);
+void print_map(t_map *map);
+void print_textures(t_texture *textures);
+void print_cub3d(t_cub3d *cub3d);
+int border_map(char *line);
+int read_map(int fd, t_cub3d *cub3d);
+void    free_cub3d(t_cub3d *cub3d);
+int open_textures(t_cub3d *cub3d);
+int check_map(t_cub3d *cub3d);
 int read_file(int fd, t_cub3d *cub3d);
 t_texture *create_node_texture(char *name, char *path, int red, int green, int blue);
 t_map *create_node_map(char *line, int row_num);
