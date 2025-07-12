@@ -1,146 +1,100 @@
-# include <cub3D.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   link_list_op.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malja-fa <malja-fa@student.42amman.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/12 17:10:10 by malja-fa          #+#    #+#             */
+/*   Updated: 2025/07/12 17:10:11 by malja-fa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-t_map *new_map_node (char *line, int row_num)
+#include <cub3D.h>
+
+t_map	*new_map_node(char *line, int row_num)
 {
-    t_map *new_node;
+	t_map	*new_node;
 
-    new_node = malloc(sizeof(t_map));
-    if (!new_node)
-        return (NULL);
-    new_node->data = line;
-    new_node->row_num = row_num;
-    new_node->next = NULL;
-    new_node->prev = NULL;
-    return (new_node);
+	new_node = malloc(sizeof(t_map));
+	if (!new_node)
+		return (NULL);
+	new_node->data = line;
+	new_node->row_num = row_num;
+	new_node->next = NULL;
+	new_node->prev = NULL;
+	return (new_node);
 }
 
-void add_node_map(t_map **head, t_map *new_node)
+void	add_node_map(t_map **head, t_map *new_node)
 {
-    t_map *current;
+	t_map	*current;
 
-    if (!*head)
-    {
-        *head = new_node;
-        return ;
-    }
-    current = *head;
-    while (current->next)
-        current = current->next;
-    current->next = new_node;
-    new_node->prev = current;
+	if (!*head)
+	{
+		*head = new_node;
+		return ;
+	}
+	current = *head;
+	while (current->next)
+		current = current->next;
+	current->next = new_node;
+	new_node->prev = current;
 }
 
-void free_map(t_map *head)
+t_texture	*create_node_texture(char *name, char *path, char **tokens, int red,
+		int green, int blue)
 {
-    t_map *temp;
+	t_texture	*new_node;
 
-    while (head)
-    {
-        temp = head;
-        head = head->next;
-        free(temp->data);
-        free(temp);
-    }
+	new_node = malloc(sizeof(t_texture));
+	if (!new_node)
+		return (NULL);
+	new_node->name = name;
+	new_node->path = path;
+	new_node->tokens = tokens;
+	new_node->red = red;
+	new_node->green = green;
+	new_node->blue = blue;
+	new_node->next = NULL;
+	if (!(!ft_strcmp(name, "F") || !ft_strcmp(name, "C")))
+	{
+		new_node->xpm = mlx_load_xpm42(path);
+		if (!new_node->xpm)
+			return (NULL);
+	}
+	else
+		new_node->xpm = NULL;
+	return (new_node);
 }
 
-t_texture *create_node_texture(char *name, char *path, char **tokens, int red, int green, int blue)
+void	add_node_texture(t_texture **head, t_texture *new_node)
 {
-    t_texture *new_node;
+	t_texture	*current;
 
-    new_node = malloc(sizeof(t_texture));
-    if (!new_node)
-        return (NULL);
-    new_node->name = name;
-    new_node->path = path;
-    new_node->tokens = tokens;
-    new_node->red = red;
-    new_node->green = green;
-    new_node->blue = blue;
-    new_node->next = NULL;
-    if (!(!ft_strcmp(name, "F") || !ft_strcmp(name, "C")))
-    {
-        fprintf(stderr, "HIIII\n"); 
-        new_node->xpm = mlx_load_xpm42(path);
-        if (!new_node->xpm)
-            return (NULL);
-    }
-    else
-        new_node->xpm = NULL;
-    return (new_node);
+	if (!*head)
+	{
+		*head = new_node;
+		return ;
+	}
+	current = *head;
+	while (current->next)
+		current = current->next;
+	current->next = new_node;
 }
 
-void add_node_texture(t_texture **head, t_texture *new_node)
+t_texture	*get_name_texture(t_texture *texture, char *name)
 {
-    t_texture *current;
+	t_texture	*current;
 
-    if (!*head)
-    {
-        *head = new_node;
-        return ;
-    }
-    current = *head;
-    while (current->next)
-        current = current->next;
-    current->next = new_node;
-}
-
-void free_textures(t_texture *head)
-{
-    t_texture *temp;
-
-    while (head)
-    {
-        temp = head;
-        head = head->next;
-        free(temp->name);
-        free(temp->path);
-        free(temp->tokens);
-        if (temp->xpm)
-            mlx_delete_xpm42(temp->xpm);
-        free(temp);
-    }
-}
-
-
-t_texture *get_name_texture(t_texture *texture, char *name)
-{
-    t_texture *current;
-
-    current = texture;
-    if (!texture || !name)
-        return (NULL);
-    while (current)
-    {
-        if (ft_strcmp(current->name, name) == 0)
-            return (current);
-        current = current->next;
-    }
-    return (NULL);
-}
-
-void free_cub3d(t_cub3d *cub3d)
-{
-    if (!cub3d)
-        return;
-    if (cub3d->textures)
-    {
-        free_textures(cub3d->textures);
-        cub3d->textures = NULL;
-    }
-    if (cub3d->map)
-    {
-        free_map(cub3d->map);
-        cub3d->map = NULL;
-    }
-    if (cub3d->mlx)
-    {
-        if (cub3d->img)
-        {
-            mlx_delete_image(cub3d->mlx, cub3d->img);
-            cub3d->img = NULL;
-        }
-        mlx_terminate(cub3d->mlx);
-        cub3d->mlx = NULL;
-    }
-    free(cub3d);
+	current = texture;
+	if (!texture || !name)
+		return (NULL);
+	while (current)
+	{
+		if (ft_strcmp(current->name, name) == 0)
+			return (current);
+		current = current->next;
+	}
+	return (NULL);
 }
