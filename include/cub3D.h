@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
+/*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:33:20 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/11 19:21:25 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/12 13:59:27 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,8 +123,6 @@ int read_map(int fd, t_cub3d *cub3d);
 void    free_cub3d(t_cub3d *cub3d);
 int open_textures(t_cub3d *cub3d);
 int check_map(t_cub3d *cub3d);
-int read_file(int fd, t_cub3d *cub3d);
-t_texture *create_node_texture(char *name, char *path, int red, int green, int blue);
 t_map *create_node_map(char *line, int row_num);
 void add_node_map(t_map **head, t_map *new_node);
 void free_map(t_map *head);
@@ -136,4 +134,7 @@ int valid_file(int argc, char **argv, t_cub3d *cub3d);
 int main_1(t_cub3d *cub3d);
 void start_dda(t_cub3d *cub3d);
 t_texture *get_name_texture(t_texture *textures, char *name);
+void	key_hook(void *param);
+void	rotate(float old_dir_x, float old_plane_x, float rot_speed, t_cub3d *cub3d);
+void	render_loop(void *param);
 #endif

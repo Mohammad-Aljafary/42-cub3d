@@ -1,4 +1,4 @@
-#include <cub3D.h>
+#include <../include/cub3D.h>
 
 int     valid_file(int argc, char** argv, t_cub3d *cub3d)
 {
@@ -29,6 +29,41 @@ int     valid_file(int argc, char** argv, t_cub3d *cub3d)
     return (0);
 }
 
+void    init_cub(t_cub3d *cub3d)
+{
+    cub3d->dir_x = cos(cub3d->player_angle);
+    cub3d->dir_y = sin(cub3d->player_angle);
+    cub3d->plane_x = -cub3d->dir_y * 0.66f;
+    cub3d->plane_y = cub3d->dir_x * 0.66f;
+    cub3d->mlx = mlx_init(cub3d->map_width, cub3d->map_height, "cub3D", true);
+    if (!cub3d->mlx)
+    {
+        ft_fprintf(2, "hio\n");
+        exit (1);
+    }
+    mlx_image_t *img = mlx_new_image(cub3d->mlx, cub3d->map_width, cub3d->map_height);
+    if (!img)
+    {
+        printf("Failed to create image\n");
+        return ;
+    }
+    cub3d->img = img;
+    if (mlx_image_to_window(cub3d->mlx, img, 0, 0) == -1)
+    {
+        printf("Failed to put image to window\n");
+        return ;
+    }
+    mlx_loop_hook(cub3d->mlx, key_hook, cub3d);
+    mlx_loop_hook(cub3d->mlx, render_loop, cub3d);
+    mlx_loop(cub3d->mlx);
+    free_cub3d(cub3d);
+}
+
+void    load_mlx(t_cub3d *cub3d)
+{
+    init_cub(cub3d);
+}
+
 int main(int argc, char** argv)
 {
     t_cub3d *cub3d;
@@ -38,8 +73,10 @@ int main(int argc, char** argv)
     if (valid_file(argc, argv, cub3d) == -1)
     {
         free_cub3d(cub3d);
+        fprintf(stderr, "hi\n");
         return (EXIT_FAILURE);
     }
+    load_mlx(cub3d);
     free_cub3d(cub3d);
 }
 /*

@@ -15,8 +15,8 @@ int check_player(t_map *map, t_cub3d *cub3d)
                 map->data[i] == 'E' || map->data[i] == 'W')
             {
                 player_count++;
-                cub3d->player_x = map->row_num;
-                cub3d->player_y = i;
+                cub3d->player_y = map->row_num + .5;
+                cub3d->player_x = i + .5;
                 if (map->data[i] == 'N')
                     cub3d->player_angle = (PI / 2);
                 else if (map->data[i] == 'S')
@@ -197,8 +197,8 @@ int get_longest_row(t_map *map)
 
 void    set_height_width(t_cub3d *cub3d)
 {
-    cub3d->map_height = get_last_row(cub3d->map);
-    cub3d->map_width = get_longest_row(cub3d->map);
+    cub3d->map_height = 600;
+    cub3d->map_width = 800;
 }
 
 int check_map(t_cub3d *cub3d)

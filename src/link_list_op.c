@@ -57,6 +57,15 @@ t_texture *create_node_texture(char *name, char *path, char **tokens, int red, i
     new_node->green = green;
     new_node->blue = blue;
     new_node->next = NULL;
+    if (!(!ft_strcmp(name, "F") || !ft_strcmp(name, "C")))
+    {
+        fprintf(stderr, "HIIII\n"); 
+        new_node->xpm = mlx_load_xpm42(path);
+        if (!new_node->xpm)
+            return (NULL);
+    }
+    else
+        new_node->xpm = NULL;
     return (new_node);
 }
 

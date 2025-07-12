@@ -54,7 +54,10 @@ int process_input(char *line, t_cub3d *cub3d)
         return (-1);
     result = check_dir_text(tokens, cub3d);
     if (result == -1)
+    {
+        fprintf(stderr, "HIIIIII\n");
         return (-1);
+    }
     else if (result)
         return (0);
     result = check_color(tokens, cub3d);

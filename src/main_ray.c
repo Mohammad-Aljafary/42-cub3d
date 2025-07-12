@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
+/*   By: yalrfai <yalrfai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/06 20:52:02 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/11 19:22:06 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/12 14:47:16 by yalrfai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	print_texture(t_cub3d *cub3d,
 {
 	t_tex_help	tex;
 
+	// fprintf(stderr, "%s\n", texture->name);
 	tex.tex_x = (int)(wall_x * (double)texture->xpm->texture.width);
 	if (dda->side == 0 && dda->ray_dir_x > 0)
 		tex.tex_x = texture->xpm->texture.width - tex.tex_x - 1;
@@ -49,6 +50,8 @@ void	print_texture(t_cub3d *cub3d,
 			| (tex.pixel[2] << 8) | tex.pixel[3];
 		mlx_put_pixel(cub3d->img, dda->x, tex.y, tex.color);
 	}
+	// fprintf(stderr, "hi\n");
+
 }
 
 void	print_floor_and_ceiling(t_cub3d *cub3d, t_dda *dda)
@@ -194,6 +197,7 @@ void	start_dda(t_cub3d *cub3d)
 		dda.draw_end = dda.line_height / 2 + cub3d->map_height / 2;
 		if (dda.draw_end >= cub3d->map_height)
 			dda.draw_end = cub3d->map_height - 1;
+		fprintf(stderr, "%i %i\n", dda.draw_start, dda.draw_end);
 		start_drawing(cub3d, &dda);
 		dda.x++;
 	}
