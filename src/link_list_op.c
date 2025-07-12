@@ -49,7 +49,6 @@ t_texture *create_node_texture(char *name, char *path, char **tokens, int red, i
 
     new_node = malloc(sizeof(t_texture));
     if (!new_node)
-
         return (NULL);
     new_node->name = name;
     new_node->path = path;
@@ -87,13 +86,52 @@ void free_textures(t_texture *head)
         free(temp->name);
         free(temp->path);
         free(temp->tokens);
+        if (temp->xpm)
+            mlx_delete_xpm42(temp->xpm);
         free(temp);
     }
 }
 
-void    free_cub3d(t_cub3d *cub3d)
+
+t_texture *get_name_texture(t_texture *texture, char *name)
 {
-    free_map(cub3d->map);
-    free_textures(cub3d->textures);
-    free (cub3d);
+    t_texture *current;
+
+    current = texture;
+    if (!texture || !name)
+        return (NULL);
+    while (current)
+    {
+        if (ft_strcmp(current->name, name) == 0)
+            return (current);
+        current = current->next;
+    }
+    return (NULL);
+}
+
+void free_cub3d(t_cub3d *cub3d)
+{
+    if (!cub3d)
+        return;
+    if (cub3d->textures)
+    {
+        free_textures(cub3d->textures);
+        cub3d->textures = NULL;
+    }
+    if (cub3d->map)
+    {
+        free_map(cub3d->map);
+        cub3d->map = NULL;
+    }
+    if (cub3d->mlx)
+    {
+        if (cub3d->img)
+        {
+            mlx_delete_image(cub3d->mlx, cub3d->img);
+            cub3d->img = NULL;
+        }
+        mlx_terminate(cub3d->mlx);
+        cub3d->mlx = NULL;
+    }
+    free(cub3d);
 }

@@ -3,5 +3,6 @@ SRC= main.c \
 	print.c \
 	link_list_op.c \
 	check_texture.c \
-	check_map.c 
+	check_map.c \
+	main_ray.c \
      

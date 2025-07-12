@@ -23,7 +23,8 @@ $(LIBFT_A):
 	$(MAKE) -C $(LIBFT)
 
 $(MLX_A):
-	$(MAKE) -C $(MLX)/build
+	cmake -B $(MLX)/build $(MLX);
+	cmake --build $(MLX)/build -j4
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -31,11 +32,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 clean:
 	$(MAKE) -C $(LIBFT) clean
-	$(MAKE) -C $(MLX)/build clean
+	cmake --build $(MLX)/build --target clean; \
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	$(MAKE) -C $(LIBFT) fclean
+	rm -rf $(MLX)/build;
 	rm -f $(NAME)
 
 re: fclean all
