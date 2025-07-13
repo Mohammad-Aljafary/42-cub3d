@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:09:59 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 17:40:24 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/13 18:13:37 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,8 @@ int	check_color(char **token, t_cub3d *cub3d)
 	int		b;
 	t_color	color;
 
-	if (ft_strcmp(token[0], "F") != 0 && ft_strcmp(token[0], "C") != 0)
-		return (0);
-	if (token[1] && token[2])
-	{
-		ft_fprintf(2, "Error: multiple or no texture path\n");
-		return (-1);
-	}
+	if (val_color(token, 1) != 1)
+		return (val_color(token, 0));
 	colors = ft_split(token[1], ',');
 	if (!colors)
 		return (-1);

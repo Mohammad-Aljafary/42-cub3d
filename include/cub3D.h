@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 15:33:20 by yaman-alrif       #+#    #+#             */
-/*   Updated: 2025/07/13 14:11:11 by mohammad-bo      ###   ########.fr       */
+/*   Updated: 2025/07/13 18:15:12 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,42 +116,43 @@ typedef struct s_color
     int blue;
 } t_color;
 
-int         check_extension(const char *filename, const char *extension);
-int         check_dir_text(char **tokens, t_cub3d *cub3d);
-int         check_color(char **tokens, t_cub3d *cub3d);
-int         is_all_text_exist(t_cub3d *cub3d);
-int         read_file(int fd, t_cub3d *cub3d);
+int			check_extension(const char *filename, const char *extension);
+int			check_dir_text(char **tokens, t_cub3d *cub3d);
+int			check_color(char **tokens, t_cub3d *cub3d);
+int			is_all_text_exist(t_cub3d *cub3d);
+int			read_file(int fd, t_cub3d *cub3d);
 t_texture	*create_node_texture(char *name, char *path, char **tokens, t_color color);
-void        add_node_texture(t_texture **head, t_texture *new_node);
-t_map       *new_map_node (char *line, int row_num);
-void        add_node_map(t_map **head, t_map *new_node);
-void        free_map(t_map *head);
-void        free_textures(t_texture *head);
-int         process_input(char *line, t_cub3d *cub3d);
-int         read_texture(int fd, t_cub3d *cub3d);
-int         valid_file(int argc, char **argv, t_cub3d *cub3d);
-void        print_map(t_map *map);
-void        print_textures(t_texture *textures);
-void        print_cub3d(t_cub3d *cub3d);
-int         border_map(char *line);
-int         read_map(int fd, t_cub3d *cub3d);
-void        free_cub3d(t_cub3d *cub3d);
-int         open_textures(t_cub3d *cub3d);
-int         check_map(t_cub3d *cub3d);
-void        start_dda(t_cub3d *cub3d);
-t_texture   *get_name_texture(t_texture *textures, char *name);
-void	    key_hook(void *param);
-void	    rotate(float old_dir_x, float old_plane_x, float rot_speed, t_cub3d *cub3d);
-void	    render_loop(void *param);
-void        del_new_line(char **str);
-void        free_lines(int fd);
-int         element_exist(char *line, int index);
-void        fill_spaces(t_map *map);
-int         valid_border(t_map *map);
-int         is_invalid_border_char(char c);
-void	    move(float new_x, float new_y, t_cub3d *cub3d);
-void	    init_ray(t_dda *dda, t_cub3d *cub3d);
-void	    start_drawing(t_cub3d *cub3d, t_dda *dda);
-void	    find_it(t_dda *dda, t_cub3d *cub3d);
-char	    get_map_char(t_cub3d *cub3d, int x, int y);
+void		add_node_texture(t_texture **head, t_texture *new_node);
+t_map		*new_map_node (char *line, int row_num);
+void		add_node_map(t_map **head, t_map *new_node);
+void		free_map(t_map *head);
+void		free_textures(t_texture *head);
+int			process_input(char *line, t_cub3d *cub3d);
+int			read_texture(int fd, t_cub3d *cub3d);
+int			valid_file(int argc, char **argv, t_cub3d *cub3d);
+void		print_map(t_map *map);
+void		print_textures(t_texture *textures);
+void		print_cub3d(t_cub3d *cub3d);
+int			border_map(char *line);
+int			read_map(int fd, t_cub3d *cub3d);
+void		free_cub3d(t_cub3d *cub3d);
+int			open_textures(t_cub3d *cub3d);
+int			check_map(t_cub3d *cub3d);
+void		start_dda(t_cub3d *cub3d);
+t_texture	*get_name_texture(t_texture *textures, char *name);
+void		key_hook(void *param);
+void		rotate(float old_dir_x, float old_plane_x, float rot_speed, t_cub3d *cub3d);
+void		render_loop(void *param);
+void		del_new_line(char **str);
+void		free_lines(int fd);
+int			element_exist(char *line, int index);
+void		fill_spaces(t_map *map);
+int			valid_border(t_map *map);
+int			is_invalid_border_char(char c);
+void		move(float new_x, float new_y, t_cub3d *cub3d);
+void		init_ray(t_dda *dda, t_cub3d *cub3d);
+void		start_drawing(t_cub3d *cub3d, t_dda *dda);
+void		find_it(t_dda *dda, t_cub3d *cub3d);
+char		get_map_char(t_cub3d *cub3d, int x, int y);
+int			val_color(char **token, int print);
 #endif

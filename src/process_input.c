@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:08:39 by mohammad-bo       #+#    #+#             */
-/*   Updated: 2025/07/13 17:41:08 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/13 18:14:24 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,17 @@ int	process_input(char *line, t_cub3d *cub3d)
 	if (result <= 0)
 		return (result);
 	return (process_map_line(line, cub3d));
+}
+
+int	val_color(char **token, int print)
+{
+	if (ft_strcmp(token[0], "F") != 0 && ft_strcmp(token[0], "C") != 0)
+		return (0);
+	if (token[1] && token[2])
+	{
+		if (print)
+			ft_fprintf(2, "Error: multiple or no texture path\n");
+		return (-1);
+	}
+	return (1);
 }
