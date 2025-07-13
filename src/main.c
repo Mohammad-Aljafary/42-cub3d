@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:10:28 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 13:41:37 by mohammad-bo      ###   ########.fr       */
+/*   Updated: 2025/07/13 15:04:21 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	load_mlx(cub3d);
-	free_cub3d(cub3d);
 }
 /*
 int	main(void)

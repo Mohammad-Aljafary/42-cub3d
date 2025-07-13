@@ -1,0 +1,56 @@
+# Suppress X11/GLFW/LLVM library allocations
+{
+   X11_XrmInitialize
+   Memcheck:Leak
+   ...
+   fun:XrmInitialize
+}
+
+{
+   GLFW_init
+   Memcheck:Leak
+   ...
+   fun:glfwInit
+}
+
+{
+   MLX_init
+   Memcheck:Leak
+   ...
+   fun:mlx_init
+}
+
+{
+   LLVM_library_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libLLVM.so*
+}
+
+{
+   X11_library_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libX11.so*
+}
+
+{
+   stdcpp_library_leaks
+   Memcheck:Leak
+   ...
+   obj:*/libstdc++.so*
+}
+
+{
+   dynamic_linker_leaks
+   Memcheck:Leak
+   ...
+   fun:_dl_*
+}
+
+{
+   dlopen_leaks
+   Memcheck:Leak
+   ...
+   fun:dlopen*
+}
