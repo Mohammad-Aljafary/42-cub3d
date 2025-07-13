@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:09:59 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 13:53:47 by mohammad-bo      ###   ########.fr       */
+/*   Updated: 2025/07/13 17:40:24 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,11 @@ int	check_color(char **token, t_cub3d *cub3d)
 
 	if (ft_strcmp(token[0], "F") != 0 && ft_strcmp(token[0], "C") != 0)
 		return (0);
+	if (token[1] && token[2])
+	{
+		ft_fprintf(2, "Error: multiple or no texture path\n");
+		return (-1);
+	}
 	colors = ft_split(token[1], ',');
 	if (!colors)
 		return (-1);

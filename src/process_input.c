@@ -6,7 +6,7 @@
 /*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 14:08:39 by mohammad-bo       #+#    #+#             */
-/*   Updated: 2025/07/13 16:02:06 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/13 17:41:08 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	process_texture_and_color(char **tokens, t_cub3d *cub3d)
 	if (result == 1)
 		return (0);
 	result = check_color(tokens, cub3d);
-	if (result == -1)
+	if (result == -1 && ft_free_split(tokens))
 		return (-1);
 	if (result == 1)
 		return (0);
