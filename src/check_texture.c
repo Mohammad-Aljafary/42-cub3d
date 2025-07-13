@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:09:52 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 14:22:09 by mohammad-bo      ###   ########.fr       */
+/*   Updated: 2025/07/13 15:28:30 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ int	is_all_text_exist(t_cub3d *cub3d)
 
 int	test_open(int fd, t_texture *temp)
 {
+	fd = open(temp->path, O_RDONLY);
 	if (fd < 0)
 	{
 		ft_fprintf(2, "Error: Could not open texture file: %s\n",
