@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malja-fa <malja-fa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:12:31 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/12 17:12:32 by malja-fa         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:44:30 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,8 @@ int	check_invalid_characters(t_map *map)
 				&& map->data[j] != 'S' && map->data[j] != 'E'
 				&& map->data[j] != 'W')
 			{
-				ft_fprintf(2, "Error: Invalid character '%c' in map at row%d.\n", map->data[j], map->row_num);
+				ft_fprintf(2, "Error: Invalid character '%c' in map.\n",
+					map->data[j]);
 				return (-1);
 			}
 			j++;

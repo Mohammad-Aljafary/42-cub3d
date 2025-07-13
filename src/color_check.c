@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malja-fa <malja-fa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:09:59 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/12 17:10:00 by malja-fa         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:53:47 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,11 @@ static int	parse_color_values(char **colors, int *r, int *g, int *b)
 	return (0);
 }
 
-static int	create_and_add_texture(char **token, t_cub3d *cub3d, int r, int g,
-		int b)
+static int	create_and_add_texture(char **token, t_cub3d *cub3d, t_color color)
 {
 	t_texture	*new_texture;
 
-	new_texture = create_node_texture(token[0], token[1], token, r, g, b);
+	new_texture = create_node_texture(token[0], token[1], token, color);
 	if (!new_texture)
 	{
 		ft_fprintf(2, "Error: malloc failed\n");
@@ -64,6 +63,7 @@ int	check_color(char **token, t_cub3d *cub3d)
 	int		r;
 	int		g;
 	int		b;
+	t_color	color;
 
 	if (ft_strcmp(token[0], "F") != 0 && ft_strcmp(token[0], "C") != 0)
 		return (0);
@@ -77,8 +77,11 @@ int	check_color(char **token, t_cub3d *cub3d)
 		ft_free_split(colors);
 		return (-1);
 	}
+	color.red = r;
+	color.green = g;
+	color.blue = b;
 	ft_free_split(colors);
-	if (create_and_add_texture(token, cub3d, r, g, b) == -1)
+	if (create_and_add_texture(token, cub3d, color) == -1)
 		return (-1);
 	return (1);
 }

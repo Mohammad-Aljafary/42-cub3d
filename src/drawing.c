@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malja-fa <malja-fa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:10:03 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/12 17:10:04 by malja-fa         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:40:15 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	print_texture(t_cub3d *cub3d, t_texture *texture, t_dda *dda,
 		tex.tex_pos += tex.step;
 		tex.pixel = &texture->xpm->texture.pixels[(tex.tex_y
 				* texture->xpm->texture.width + tex.tex_x) * 4];
-		tex.color = (tex.pixel[0] << 24) | (tex.pixel[1] << 16) | (tex.pixel[2] << 8) | tex.pixel[3];
+		tex.color = (tex.pixel[0] << 24) | (tex.pixel[1] << 16)
+			| (tex.pixel[2] << 8) | tex.pixel[3];
 		mlx_put_pixel(cub3d->img, dda->x, tex.y, tex.color);
 	}
 }
@@ -48,8 +49,12 @@ void	print_floor_and_ceiling(t_cub3d *cub3d, t_dda *dda)
 
 	floor_texture = get_name_texture(cub3d->textures, "F");
 	ceiling_texture = get_name_texture(cub3d->textures, "C");
-	color_c = (ceiling_texture->red << 24) | (ceiling_texture->green << 16) | (ceiling_texture->blue << 8) | 0xFF;
-	color_f = (floor_texture->red << 24) | (floor_texture->green << 16) | (floor_texture->blue << 8) | 0xFF;
+	color_c = (ceiling_texture->red << 24)
+		| (ceiling_texture->green << 16)
+		| (ceiling_texture->blue << 8) | 0xFF;
+	color_f = (floor_texture->red << 24)
+		| (floor_texture->green << 16)
+		| (floor_texture->blue << 8) | 0xFF;
 	y = -1;
 	while (++y < cub3d->map_height)
 	{

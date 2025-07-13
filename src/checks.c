@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malja-fa <malja-fa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:09:55 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/12 17:09:56 by malja-fa         ###   ########.fr       */
+/*   Updated: 2025/07/13 14:07:33 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,59 +23,6 @@ int	check_extension(const char *filename, const char *extension)
 		return (-1);
 	if (ft_strcmp(filename + filename_len - extension_len, extension) != 0)
 		return (-1);
-	return (0);
-}
-
-int	process_input(char *line, t_cub3d *cub3d)
-{
-	char	*line_trimmed;
-	char	**tokens;
-	t_map	*new_map;
-	char	*dup_line;
-	int		result;
-
-	new_map = NULL;
-	dup_line = NULL;
-	line_trimmed = ft_strtrim(line, " \t\n\r");
-	if (!line_trimmed)
-		return (-1);
-	if (line_trimmed[0] == '\0')
-	{
-		free(line_trimmed);
-		return (0);
-	}
-	tokens = ft_split(line_trimmed, ' ');
-	free(line_trimmed);
-	if (!tokens)
-		return (-1);
-	result = check_dir_text(tokens, cub3d);
-	if (result == -1)
-		return (-1);
-	else if (result)
-		return (0);
-	result = check_color(tokens, cub3d);
-	if (result == -1)
-		return (-1);
-	else if (result == 1)
-		return (0);
-	ft_free_split(tokens);
-	result = border_map(line);
-	if (!result)
-	{
-		ft_fprintf(2, "Error: Invalid Texture\n");
-		return (-1);
-	}
-	else
-	{
-		dup_line = ft_strdup(line);
-		if (!dup_line)
-			return (-1);
-		new_map = new_map_node(dup_line, 1);
-		if (!new_map)
-			return (-1);
-		add_node_map(&cub3d->map, new_map);
-		return (2);
-	}
 	return (0);
 }
 
@@ -99,37 +46,42 @@ int	read_texture(int fd, t_cub3d *cub3d)
 	return (0);
 }
 
-int	read_map(int fd, t_cub3d *cub3d)
+int	handle_line(char *line, int index, t_cub3d *cub3d)
 {
-	char	*line;
 	t_map	*new_map;
-	int		i;
 
-	line = get_next_line(fd);
-	i = 2;
-	while (line)
-	{
-		del_new_line(&line);
-		if (line[0] == '\0')
-		{
-			free(line);
-			return (-1);
-		}
-		new_map = new_map_node(line, i);
-		if (!new_map)
-		{
-			free(line);
-			return (-1);
-		}
-		add_node_map(&cub3d->map, new_map);
-		line = get_next_line(fd);
-		i++;
-	}
-	if (cub3d->map == NULL)
+	del_new_line(&line);
+	if (line[0] == '\0')
 	{
 		free(line);
 		return (-1);
 	}
+	new_map = new_map_node(line, index);
+	if (!new_map)
+	{
+		free(line);
+		return (-1);
+	}
+	add_node_map(&cub3d->map, new_map);
+	return (0);
+}
+
+int	read_map(int fd, t_cub3d *cub3d)
+{
+	char	*line;
+	int		i;
+
+	i = 2;
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (handle_line(line, i, cub3d) == -1)
+			return (-1);
+		line = get_next_line(fd);
+		i++;
+	}
+	if (!cub3d->map)
+		return (-1);
 	return (0);
 }
 

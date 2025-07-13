@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malja-fa <malja-fa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:09:42 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/12 17:15:40 by malja-fa         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:47:05 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	check_surrounding(t_map *map, int index)
 		return (-1);
 	if (map->prev->data[index] == ' ' || map->prev->data[index - 1] == ' '
 		|| map->prev->data[index + 1] == ' '
-        || map->prev->data[index + 1] == '\0')
+		|| map->prev->data[index + 1] == '\0')
 		return (-1);
 	if (!map->next || !map->next->data)
 		return (-1);
 	if (map->next->data[index] == ' ' || map->next->data[index - 1] == ' '
 		|| map->next->data[index + 1] == ' '
-        || map->next->data[index + 1] == '\0')
+		|| map->next->data[index + 1] == '\0')
 		return (-1);
 	return (1);
 }

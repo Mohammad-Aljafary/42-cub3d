@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malja-fa <malja-fa@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:10:28 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/12 17:10:29 by malja-fa         ###   ########.fr       */
+/*   Updated: 2025/07/13 13:41:37 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,12 @@ int	main(void)
 	cub3d->textures->next->xpm = mlx_load_xpm42(cub3d->textures->next->path);
 	cub3d->textures->next->next = create_node_texture("WE", "wall/wall_4.xpm42",
 			0, 0, 0);
-	cub3d->textures->next->next->xpm = mlx_load_xpm42(cub3d->textures->next->next->path);
+	cub3d->textures->next->next->xpm = 
+			mlx_load_xpm42(cub3d->textures->next->next->path);
 	cub3d->textures->next->next->next = create_node_texture("EA",
 			"wall/wood.xpm42", 0, 0, 0);
-	cub3d->textures->next->next->next->xpm = mlx_load_xpm42(cub3d->textures->next->next->next->path);
+	cub3d->textures->next->next->next->xpm =
+			 mlx_load_xpm42(cub3d->textures->next->next->next->path);
 	cub3d->textures->next->next->next->next = create_node_texture("F", NULL,
 			100, 100, 100);
 	cub3d->textures->next->next->next->next->next = create_node_texture("C",

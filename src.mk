@@ -11,4 +11,5 @@ SRC= main.c \
 	drawing.c \
 	movements.c \
 	ray_util.c \
-	list_op_util.c
+	list_op_util.c \
+	process_input.c
