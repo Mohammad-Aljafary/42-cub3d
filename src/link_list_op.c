@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   link_list_op.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:10:10 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 13:54:54 by mohammad-bo      ###   ########.fr       */
+/*   Updated: 2025/07/13 16:19:30 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ t_texture	*create_node_texture(char *name, char *path, char **tokens,
 	{
 		new_node->xpm = mlx_load_xpm42(path);
 		if (!new_node->xpm)
+		{
+			free(new_node);
 			return (NULL);
+		}
 	}
 	else
 		new_node->xpm = NULL;

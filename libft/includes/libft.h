@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 12:10:21 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/09 16:27:57 by mohammad-bo      ###   ########.fr       */
+/*   Updated: 2025/07/13 16:03:58 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ int					is_delim(char c, const char *delimiters);
 int					ft_putchar(int c);
 int					ft_fprintf(int fd, const char *format, ...);
 int					ft_strcmp(const char *s1, const char *s2);
-void				ft_free_split(char **str);
+int					ft_free_split(char **str);
 int					count_word(char *s, char c);
 #endif
