@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:09:52 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 15:28:30 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/15 10:53:23 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	is_all_text_exist(t_cub3d *cub3d)
 		temp = temp->next;
 	}
 	if (check.no_count != 1 || check.so_count != 1 || check.we_count != 1
-		|| check.ea_count != 1 || check.color_count < 2)
+		|| check.ea_count != 1 || check.color_count != 2)
 	{
 		ft_fprintf(2, "Error: Missing or duplicate texture definitions.\n");
 		return (-1);

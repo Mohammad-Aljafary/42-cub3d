@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:09:59 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 18:13:37 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/15 10:46:59 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
