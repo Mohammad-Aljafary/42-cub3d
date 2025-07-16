@@ -26,7 +26,7 @@ $(MLX_A):
 	cmake -B $(MLX)/build $(MLX);
 	cmake --build $(MLX)/build -j4
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c ./include/cub3D.h
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
