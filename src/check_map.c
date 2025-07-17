@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:12:31 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 13:44:30 by mohammad-bo      ###   ########.fr       */
+/*   Updated: 2025/07/17 08:39:18 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	set_player_pos(int *player_count, t_map *map, int i, t_cub3d *cub3d)
 	cub3d->player_y = map->row_num + .5;
 	cub3d->player_x = i + .5;
 	if (map->data[i] == 'N')
-		cub3d->player_angle = (PI / 2);
-	else if (map->data[i] == 'S')
 		cub3d->player_angle = 3 * (PI / 2);
+	else if (map->data[i] == 'S')
+		cub3d->player_angle = (PI / 2);
 	else if (map->data[i] == 'E')
 		cub3d->player_angle = 0;
 	else if (map->data[i] == 'W')

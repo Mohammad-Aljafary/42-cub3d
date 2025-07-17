@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_border.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:09:42 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 13:47:05 by mohammad-bo      ###   ########.fr       */
+/*   Updated: 2025/07/17 08:36:58 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,6 @@ int	border_map(char *line)
 
 	len = ft_strlen(line);
 	i = 1;
-	if (len < 3)
-		return (0);
 	while (i < len - 1)
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != ' ')

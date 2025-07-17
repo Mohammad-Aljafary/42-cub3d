@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
+/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:10:03 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/13 13:40:15 by mohammad-bo      ###   ########.fr       */
+/*   Updated: 2025/07/17 08:42:02 by yaman-alrif      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,16 @@ void	start_drawing(t_cub3d *cub3d, t_dda *dda)
 	if (dda->side == 0)
 	{
 		if (dda->ray_dir_x < 0)
-			texture = get_name_texture(cub3d->textures, "WE");
-		else
 			texture = get_name_texture(cub3d->textures, "EA");
+		else
+			texture = get_name_texture(cub3d->textures, "WE");
 	}
 	else
 	{
 		if (dda->ray_dir_y < 0)
-			texture = get_name_texture(cub3d->textures, "NO");
-		else
 			texture = get_name_texture(cub3d->textures, "SO");
+		else
+			texture = get_name_texture(cub3d->textures, "NO");
 	}
 	print_texture(cub3d, texture, dda, wall_x);
 	print_floor_and_ceiling(cub3d, dda);
