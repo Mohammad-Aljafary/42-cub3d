@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yaman-alrifai <yaman-alrifai@student.42    +#+  +:+       +#+        */
+/*   By: mohammad-boom <mohammad-boom@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 17:10:41 by malja-fa          #+#    #+#             */
-/*   Updated: 2025/07/17 08:45:58 by yaman-alrif      ###   ########.fr       */
+/*   Updated: 2025/07/19 08:53:20 by mohammad-bo      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ void	fill_spaces(t_map *map)
 		{
 			if (map->data[j] == ' ')
 			{
-				map->data[j] = '1';
+				if (element_exist(map->data, j - 1))
+					map->data[j] = '1';
 			}
 			j--;
 		}
